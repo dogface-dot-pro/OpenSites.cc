@@ -1,7 +1,6 @@
 <?php
 
-	if (checkPost('password') != $password)
-		header("Location: ?page=" . $contentURL);
+if (checkPost('password') === $password) {
 
 	$position 		= intval(checkPost('position'));
 
@@ -132,5 +131,7 @@
 		default: break;
 
 	}
+
+}
 
 ?>
