@@ -1,0 +1,42 @@
+<?php
+
+echo "<div class='edit'>\n\n";
+
+echo "<h2>Editing: " . $contentTitle . "</h2>\n\n";
+
+if ($updateOn) {
+
+	$entryText = (string) $_POST['entryText'];
+
+ 	if ($_POST['entryPassword'] === $password) {
+ 		
+ 		$editFile = fopen('oscc/content/' . $contentURL, "w");
+ 		
+ 		fclose($editFile);
+
+ 		file_put_contents('oscc/content/' . $contentURL, $entryText);
+
+ 		echo '<a href="?page=' . $contentURL . '"><div class="alert">Update successful!</div></a>' . "\n\n";
+ 	
+ 	} else {
+ 		
+ 		echo '<a href="?page=' . $contentURL . '&edit"><div class="alert">Incorrect Password! Try again?</div></a>' . "\n\n";
+ 	
+ 	}
+
+ 	$entryPassword = '';
+
+} else {
+	
+	echo '<form action="?page=' . $contentURL . '&update" method="post">
+	 	<textarea type="text" name = "entryText" wrap="soft">';
+	include 'oscc/content/' . $contentURL;
+	echo '</textarea><br> 
+	 	Password: <input type="password" name="entryPassword" class="password"><br> 
+	 	<input type="submit" value="Submit"> 
+	 	</form>';
+}
+
+echo "</div>\n\n";
+
+?>

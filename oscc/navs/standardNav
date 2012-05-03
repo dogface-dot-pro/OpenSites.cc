@@ -1,0 +1,49 @@
+<?php
+	
+	// Site header-bar/title.
+
+	echo "<!-- Title Bar -->\n\n";
+
+	echo "<a href='/'><div class='titleBar'>\n\n";
+
+	echo "<h1>" . $siteName . "</h1>\n\n";
+
+	echo "</div></a>\n\n";
+	
+	// ### Navigation menu ###
+
+	echo "<!-- Nav Menu -->\n\n";
+
+	echo "<div class='nav'>\n\n";
+
+	echo "<ul>\n\n";
+
+	foreach ($navArray as $la) {
+
+		$liClass = ($la[1] === $contentTitle) ?
+			' class="current"' :
+			'';
+
+		$title = $la[1];
+
+		if ($la[0] === '-')
+			$lineString = "\t<a href='?page=" . strtr($title, ' ', '_') . "'><li$liClass>$title</li></a>\n\n";
+		else if ($la[0] === '#')
+			$lineString = "\t<h3>$title</h3>\n\n";
+		else
+			$lineString = '';
+
+		echo $lineString;
+	}
+
+	echo "<div class=editButtons>\n\n";
+
+	echo "<a href='?page=" . $contentURL . "&edit'>Edit page</a> | <a href='?page=" . $editPage . "'>Edit Site</a>\n\n";
+
+	echo "</div>\n\n";
+
+	echo "</ul>\n\n";
+
+	echo "</div>\n\n";
+
+?>

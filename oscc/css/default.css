@@ -1,0 +1,203 @@
+/* BODY */
+
+body {
+  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+  color: #444;
+  background-color: #eee; 
+  margin: 0;
+  padding: 0; }
+p {
+  text-indent: 1em; }
+a {
+  color: black; }
+textarea {
+  width: 100%;
+  height: 300px; }
+input {
+  display:inline;
+}
+
+/* TITLE BAR */
+
+div.titleBar {
+  background: black;
+  color: white;
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  top: 0;
+  width: 100%;
+  height: 50px;
+  text-align: center;
+  background-image:url('../img/dogface_logo.png');
+  background-repeat:no-repeat;
+  -webkit-box-shadow: 0 0 8px #AAA;
+}
+
+div.titleBar h1 {
+  position: relative;
+  top: -15px;
+  padding: 0;
+  margin: 0;
+  padding-left: 300px;
+  width: 680px;
+  font-family: 'Just Me Again Down Here', cursive;
+  font-size: 40px  
+}
+
+
+/* CONTENT */
+
+div.content {
+  position: relative;
+  width: 600px;
+  left: 300px;
+  top: 70px;
+  padding: 40px;
+  padding-top: 10px;
+  margin-bottom: 70px;
+  text-align: justify;
+  background: white;
+  -webkit-box-shadow: 0 0 8px #D0D0D0;
+  -moz-box-shadow: 0 0 8px #D0D0D0;
+  box-shadow: 0 0 8px #D0D0D0;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+
+div.content h2 {
+  padding: 10px;
+  background: #DDD;
+}
+
+div.content a {
+  font-weight: bold;
+}
+
+
+/* NAV */
+
+div.nav {
+  position: absolute;
+  top: 75px;
+  margin: 0;
+  padding: 0;
+  left: 20px;
+  width: 200px;
+  -webkit-box-shadow: 0 0 8px #D0D0D0;
+}
+div.nav ul {
+  padding: 0;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin: 0;
+  list-style-type: none;
+  background: #ccc;
+}
+div.nav li {
+  background: white;
+  margin: 5px;
+  padding: 3px;
+  border-right: 15px solid #444;
+  -webkit-box-shadow: 0 0 8px #AAA;
+}
+div.nav li.current {
+  border-right: 15px solid orange;
+}
+div.nav h2 {
+  background-color: #eee;
+  font-size: small;
+  color: #999;
+  padding-left: 5px;
+}
+div.nav h3 {
+  margin: 0;
+  padding-left: 5px;
+}
+div.nav a {
+  text-decoration: none;
+  color: #444; 
+}
+
+div.editButtons {
+  font-size: small;
+  margin: 0;
+  padding: 3px;
+}
+
+/* EDIT */
+
+div.edit {
+  position: relative;
+  width: 640px;
+  left: 300px;
+  padding: 10px;
+  margin-top: 60px;
+  margin-bottom: -50px;
+  text-align: justify;
+  background: #eee;
+}
+
+div.edit h2 {
+  margin: 0;
+  margin-bottom: 10px;
+}
+
+div.alert {
+  position: relative;
+  width: 100%;
+  margin: 0;
+  font-size: small;
+  text-decoration: none;
+  background: white;
+  padding: 3px;
+  border: 2px solid black;
+  border-left: 15px solid black;
+}
+
+/* EDIT SITE */
+
+div.siteEdActions {
+  position: relative;
+  width: 400px;
+  -webkit-box-shadow: 0 0 8px #DDD;
+}
+
+div.siteEdActions ul {
+  list-style-type: none;
+  background: #ccc;
+  padding: 5px;
+}
+
+div.siteEdActions li {
+  background: white;
+  margin: 5px;
+  padding: 3px;
+  border-left: 15px solid #444;
+}
+
+div.siteEdActions h3 {
+  margin: 0;
+  padding-left: 5px;
+}
+
+span.arrow {
+  font-size: xx-large;
+  font-weight: bold;
+  font-family: monospace;
+}
+
+div.stopEdit {
+  text-decoration: none;
+  background: white;
+  width: 200px;
+  margin: 5px;
+  padding: 3px;
+  border: 1px solid #444;
+  border-left: 15px solid #444;
+}
+
+span.stopEdit {
+  margin-left: 5px;
+}

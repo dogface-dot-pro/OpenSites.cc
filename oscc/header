@@ -1,0 +1,8 @@
+<?php
+
+	echo "\t" . '<link href="oscc/css/default.css" rel="StyleSheet" type="text/css">' . "\n\n";
+	echo "\t" . '<link href="oscc/img/favicon.ico" rel="icon" type="image/png">';
+	echo "\t" . '<link href="http://fonts.googleapis.com/css?family=Just+Me+Again+Down+Here" rel="stylesheet" type="text/css">';
+	echo "\t" . '<title>' . $siteName . ': ' . $contentTitle . '</title>' . "\n\n";
+
+?>

@@ -1,0 +1,58 @@
+<?php
+	
+	if ($update) {
+
+	}
+
+	else {
+
+		// Start a form.
+		echo "<span class='edit_site'>\n\n<h3>Select a page:</h3>\n\n<form action='?page=" . $page . "&update'>\n\n";
+
+		// Make a <ul> the same as the nav menu, but with radio buttons to select which page to work on.
+		echo "<ul>\n\n";
+
+		// Open data/navIndex - a list of top-level pages. Lines starting # denotes section-headings.
+		$navData = fopen('data/navData', 'r') or die ("Can't open navData");
+
+		// Go through each line...
+		while(!feof($navData)) { 
+
+		    $line = trim(fgets($navData));
+		    
+		    // If line starts with #, style it as a spacer.
+		    if (substr($line,0,1) === '#')
+		    	$li = '<li class="spacer"><input type="radio" name="whichPage" value="' . $line . '">' . substr($line, 1, strlen($line) - 1) . '</input></li>';
+		    else  // Otherwise style it normally.
+		    	$li = '<li><input type="radio" name="whichPage" value="' . $line . '">' . $line . '</input></li></a>'; 
+		    // Print the <li> element.
+		    echo "\t" . $li . "\n";
+
+		}
+
+		// Close file.
+		fclose($navData);
+
+		echo "</ul>\n\n";
+
+		echo '<h3>Select an action:</h3>';
+
+		echo "<input type='radio' name='whichAction' value='edit'>Edit</input></br>\n\n
+			<input type='radio' name='whichAction' value='rename'>Rename</input></br>\n\n
+			<input type='radio' name='whichAction' value='delete'>Delete</input></br>\n\n
+			<input type='radio' name='whichAction' value='Move'>Move</input></br>\n\n
+			<input type='radio' name='whichAction' value='default'>Make default page</input></br>\n\n
+			<input type='radio' name='whichAction' value='default'>Make new page after this one</input></br>"\n\n;
+		
+		echo "<p><input type='submit' value='Submit'></input>"\n\n;
+
+
+		echo "</form>\n\n</span>";
+	}
+
+?>
+
+
+
+
+

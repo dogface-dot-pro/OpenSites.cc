@@ -1,0 +1,30 @@
+<?php
+
+	function csv2arr($path) {
+		$file 			= fopen('oscc/' . $path, 'r') or die ("Can't open file oscc/" . $path);
+		$resultsArray	= array();
+
+		while (!feof($file)) {
+			$lineArray = fgetcsv($file);
+			array_push($resultsArray, $lineArray);
+		}
+		fclose($file);
+		return $resultsArray;
+	};
+
+	function arr2csv($path, $array) {
+
+		$file = fopen('oscc/' . $path, 'w');
+		$lineArr = array();
+
+		foreach ($array as $line) {
+			array_push($lineArr, implode(",", $line));
+		}
+		$wholeStr = implode("\n", $lineArr);
+
+		fclose($file);
+		file_put_contents('oscc/' . $path, $wholeStr);
+	};
+
+?>
+
