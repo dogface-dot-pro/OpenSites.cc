@@ -6,7 +6,7 @@
 
 	echo "<a href='/'><div class='titleBar'>\n\n";
 
-	echo "<h1>" . $siteName . "</h1>\n\n";
+	echo "<h1>" . $config['siteName'] . "</h1>\n\n";
 
 	echo "</div></a>\n\n";
 	
@@ -38,7 +38,7 @@
 
 	echo "<div class=editButtons>\n\n";
 
-	echo "<a href='?page=" . $contentURL . "&edit'>Edit page</a> | <a href='?page=" . $editPage . "'>Edit Site</a>\n\n";
+	echo "<a href='?page=" . $contentURL . "&edit'>Edit page</a> | <a href='?page=" . $config['editPage'] . "'>Edit Site</a>\n\n";
 
 	echo "</div>\n\n";
 

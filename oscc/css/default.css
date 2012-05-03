@@ -29,19 +29,16 @@ div.titleBar {
   width: 100%;
   height: 50px;
   text-align: center;
-  background-image:url('../img/dogface_logo.png');
-  background-repeat:no-repeat;
   -webkit-box-shadow: 0 0 8px #AAA;
 }
 
 div.titleBar h1 {
   position: relative;
-  top: -15px;
+  top: -5px;
   padding: 0;
   margin: 0;
   padding-left: 300px;
   width: 680px;
-  font-family: 'Just Me Again Down Here', cursive;
   font-size: 40px  
 }
 

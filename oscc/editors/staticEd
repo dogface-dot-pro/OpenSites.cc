@@ -8,7 +8,7 @@ if ($updateOn) {
 
 	$entryText = checkPost('entryText');
 
- 	if (checkPost('entryPassword') === $password) {
+ 	if (sha1(checkPost('entryPassword')) === $config['passwordHash']) {
  		
  		$editFile = fopen('oscc/content/' . $contentURL, "w");
  		
@@ -24,7 +24,6 @@ if ($updateOn) {
  	
  	}
 
- 	$entryPassword = '';
 
 } else {
 	

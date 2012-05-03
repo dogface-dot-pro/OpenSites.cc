@@ -1,4 +1,6 @@
 <?php
+	
+	// Converts a CSV file into an array.
 
 	function csv2arr($path) {
 		$file 			= fopen('oscc/' . $path, 'r') or die ("Can't open file oscc/" . $path);
@@ -11,6 +13,23 @@
 		fclose($file);
 		return $resultsArray;
 	};
+
+	// Converts a CSV file into key-value array 
+	// (uses first two values of each line).
+
+	function csv2kv ($path) {
+		$file 			= fopen('oscc/' . $path, 'r') or die ("Can't open file oscc/" . $path);
+		$resultsArray	= array();
+
+		while (!feof($file)) {
+			$lineArray = fgetcsv($file);
+			$resultsArray[$lineArray[0]] = $lineArray[1];
+		}
+		fclose($file);
+		return $resultsArray;
+	};
+
+	// Writes an $array into a file at $path.
 
 	function arr2csv($path, $array) {
 

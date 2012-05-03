@@ -6,7 +6,7 @@
 
 	echo "<a href='/'><div class='titleBar'>\n\n";
 
-	echo "<h1>" . $siteName . "</h1>\n\n";
+	echo "<h1>" . $config['siteName'] . "</h1>\n\n";
 
 	echo "</div></a>\n\n";
 
@@ -14,7 +14,7 @@
 
 	echo "<!-- Nav Menu -->\n\n";
 
-	echo "<form action='?page=" . $editPage . "&update' method='post'>";
+	echo "<form action='?page=" . $config['editPage'] . "&update' method='post'>";
 
 	echo "<div class='nav'>\n\n";
 

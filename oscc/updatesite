@@ -1,6 +1,6 @@
 <?php
 
-if (checkPost('password') === $password) {
+if (sha1(checkPost('password')) === $config['passwordHash']) {
 
 	$position 		= intval(checkPost('position'));
 

@@ -2,14 +2,14 @@
 
 	// Defines OScc-related functions.		
 	// Loads sitewide settings as variables: 
-	//		$default, $username, $password, $siteName.
+	//		$default, $username, $config['passwordHash'], $config['siteName'].
 	// Sets page-specific settings: 
 	//		$contentURL, $contentTitle, $editOn, $editor, $nav.
 	// Testing Git... again!
 	include 'oscc/loader';
 
-	if ($contentURL === $editPage AND $updateOn)
-		header("Location: ?page=$editPage");
+	if ($contentURL === $config['editPage'] AND $updateOn)
+		header("Location: ?page=" . $config['editPage']);
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
@@ -34,7 +34,7 @@
 	include 'oscc/navs/' . $nav;
 
 	// Loads editing interface, if $editOn is 1.
-	if (($editOn OR $updateOn) AND $contentURL != $editPage) {
+	if (($editOn OR $updateOn) AND $contentURL != $config['editPage']) {
 		echo "<!-- Editor -->\n\n";
 		include 'oscc/editors/staticEd';
 	}

@@ -4,25 +4,22 @@
 	include 'oscc/functions';
 
 // Set site-wide variables.
-	$defaultPage 	= 'About'; 		// Default $contentURL.
-	$siteName 		= 'Dogface.pro';	// The site name.
-	$editPage 		= 'Edit_Site'; 	// Name of OScc-reserved site-editing page.
-	$password 		= 'dogface'; 	// Password for editing the site.
+	$config = csv2kv('/data/siteData');
 
 // Set page-specific variables. ##
 
 	// Get 'page' variable from URL, filter it, store it as $check.
 	$check = (isset($_GET['page'])) ?
 		filter_var(strtr($_GET['page'], '_', ' ')) :
-		$defaultPage;
+		$config['defaultPage'];
 
 	$navArray = csv2arr('/data/structureData');
 
 	// Settings to load if on the edit page
 	// (since these aren't stored in structureData).
-	if ($check === strtr($editPage, '_', ' ')) {
+	if ($check === strtr($config['editPage'], '_', ' ')) {
 
-		$contentURL		= $editPage;
+		$contentURL		= $config['editPage'];
 		$contentTitle	= 'Edit Site';
 		$nav 			= 'siteEdNav';
 	
@@ -30,8 +27,8 @@
 
 		foreach($navArray as $la) { // $la = line array.
 			// Set settings from line in structureData, if it matches $check 
-			// (or $defaultPage, in case an invalid page was entered).
-			if ($la[0] === '-' AND ($la[1] === $check OR $la[1] === $defaultPage)) {
+			// (or $config['defaultPage'], in case an invalid page was entered).
+			if ($la[0] === '-' AND ($la[1] === $check OR $la[1] === $config['defaultPage'])) {
 				$contentURL 	= strtr($la[1], ' ', '_');
 				$contentTitle	= $la[1];
 				$nav 			= 'standardNav';
@@ -45,7 +42,7 @@
 	// Store whether 'update' is set.
 	$updateOn = isset($_GET['update']);
 
-	if ($contentURL === $editPage AND $updateOn)
+	if ($contentURL === $config['editPage'] AND $updateOn)
 		include 'oscc/updatesite';
 
 ?>
