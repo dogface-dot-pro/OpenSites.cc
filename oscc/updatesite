@@ -1,17 +1,14 @@
 <?php
 
-	if ($_POST['password'] != $password)
+	if (checkPost('password') != $password)
 		header("Location: ?page=" . $contentURL);
 
-	$position 		= isset($_POST['newtitle']) ?
-						intval($_POST['position']) :
-						0;
-	$action 		= isset($_POST['action']) ?
-						($_POST['action']) :
-						null;
-	$newTitle 		= isset($_POST['newtitle']) ?
-						($_POST['newtitle']) :
-						null;
+	$position 		= intval(checkPost('position'));
+
+	$action 		= checkPost('action');
+
+	$newTitle 		= checkPost('newtitle');
+
 	$tempArray		= $navArray;
 
 	switch ($action) {

@@ -26,5 +26,16 @@
 		file_put_contents('oscc/' . $path, $wholeStr);
 	};
 
+	function checkPost($input) {
+
+		if (isset($_POST[$input]) AND !empty($_POST[$input])) {
+			if (get_magic_quotes_gpc())
+				return (string) stripslashes($_POST[$input]);
+			else 
+				return (string) $_POST($input);
+		} else
+			return null;
+	};
+
 ?>
 

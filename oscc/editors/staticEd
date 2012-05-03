@@ -6,9 +6,9 @@ echo "<h2>Editing: " . $contentTitle . "</h2>\n\n";
 
 if ($updateOn) {
 
-	$entryText = (string) $_POST['entryText'];
+	$entryText = checkPost('entryText');
 
- 	if ($_POST['entryPassword'] === $password) {
+ 	if (checkPost('entryPassword') === $password) {
  		
  		$editFile = fopen('oscc/content/' . $contentURL, "w");
  		
