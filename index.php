@@ -5,7 +5,7 @@
 	//		$default, $username, $password, $siteName.
 	// Sets page-specific settings: 
 	//		$contentURL, $contentTitle, $editOn, $editor, $nav.
-	// Testing Git!
+	// Testing Git... again!
 	include 'oscc/loader';
 
 	if ($contentURL === $editPage AND $updateOn)
