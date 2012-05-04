@@ -15,15 +15,12 @@
 	function arr2csv($path, $array) {
 
 		$file = fopen('oscc/' . $path, 'w');
-		$lineArr = array();
-
+		
 		foreach ($array as $line) {
-			array_push($lineArr, implode(",", $line));
+			fputcsv($file, $line);
 		}
-		$wholeStr = implode("\n", $lineArr);
 
 		fclose($file);
-		file_put_contents('oscc/' . $path, $wholeStr);
 	};
 
 ?>
