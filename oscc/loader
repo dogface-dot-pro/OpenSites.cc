@@ -12,9 +12,9 @@
 // Set page-specific variables. ##
 
 	// Get 'page' variable from URL, filter it, store it as $check.
-	$check = (isset($_GET['page'])) ?
-		filter_var(strtr($_GET['page'], '_', ' ')) :
-		$defaultPage;
+        $check = isset($_GET['page']) ?
+                 strtr(filter_input(INPUT_GET, 'page'), '_', ' ') :
+                 $defaultPage;
 
 	$navArray = csv2arr('/data/structureData');
 
