@@ -1,15 +1,13 @@
 <?php 
 
-	// Defines OScc-related functions:
-	//		csv2arr, arr2csv, csv2kv, checkPost.		
+	// Defines OScc-related functions.		
 	// Loads sitewide settings as variables: 
-	//		defaultPage, siteName, editPage, userName, passwordHash.
+	//		$default, $username, $config['passwordHash'], $config['siteName'].
 	// Sets page-specific settings: 
-	//		$contentURL, $contentTitle, $editOn, $updateOn
-	// Loads nav data into $navArray.
-	require 'oscc/loader.php';
+	//		$contentURL, $contentTitle, $editOn, $editor, $nav.
+	// Testing Git... again!
+	include 'oscc/loader.php';
 
-	// If we just processed a change from the site-edit page, return to it.
 	if ($contentURL === $config['editPage'] AND $updateOn)
 		header("Location: ?page=" . $config['editPage']);
 
@@ -23,17 +21,16 @@
 
 <head>
 <?php
-	// Writes header elements to load stylesheets, set title, etc.
+	// Writes header elements to load stylesheets, set title.
 	include 'oscc/header.php';
 ?>
 </head>
 
 <body>
-
-<!-- ### Nav ### -->
 <?php
 	
 	// Echoes <div>s containing the nav menu, page heading, login button and smallprint.
+	echo "\n<!-- ### Nav ### -->\n\n";
 	include 'oscc/navs/' . $nav . '.php';
 
 	// Loads editing interface, if $editOn is 1.
@@ -42,20 +39,14 @@
 		include 'oscc/editors/staticEd.php';
 	}
 
-?>
-
-<!-- ### Content ### -->
-
-<div class="content">
-
-<h2><?php echo $contentTitle ?></h2>
-<?php
-
-	include 'oscc/content/' . $contentURL . '.php';
+	// Loads page content.
+	echo "<!-- ### Content ### -->\n\n";
+	echo '<div class="content">' . "\n\n";
+	echo '<h2>' . $contentTitle . "</h2>\n\n";
+	include 'oscc/content/' . $contentURL . 'php';
+	echo "\n\n</div>\n\n";
 
 ?>
-</div>
-
 <!-- ### End of Document ### -->
 
 </body>

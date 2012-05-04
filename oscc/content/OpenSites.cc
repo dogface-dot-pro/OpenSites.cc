@@ -1,1 +1,0 @@
-<p>The Advanced Technology behind this thing.</p>

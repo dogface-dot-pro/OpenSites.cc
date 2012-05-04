@@ -1,20 +1,18 @@
+<div class='edit'>
+
+<h2>Editing: <?php echo $contentTitle ?></h2>
+
 <?php
 
-echo "<div class='edit'>\n\n";
-
-echo "<h2>Editing: " . $contentTitle . "</h2>\n\n";
-
+// if &update is in URL...
 if ($updateOn) {
 
-	$entryText = (string) $_POST['entryText'];
+	$entryText = checkPost('entryText');
 
- 	if ($_POST['entryPassword'] === $password) {
+	// if password hash matches, write text from $_POST into page's file.
+ 	if (sha1(checkPost('entryPassword')) === $config['passwordHash']) {
  		
- 		$editFile = fopen('oscc/content/' . $contentURL, "w");
- 		
- 		fclose($editFile);
-
- 		file_put_contents('oscc/content/' . $contentURL, $entryText);
+		file_put_contents('oscc/content/' . $contentURL, $entryText);
 
  		echo '<a href="?page=' . $contentURL . '"><div class="alert">Update successful!</div></a>' . "\n\n";
  	
@@ -24,19 +22,19 @@ if ($updateOn) {
  	
  	}
 
- 	$entryPassword = '';
-
+// If &update is not set, make a form with a textarea, password box.
+// Fill textarea with current page contents.
 } else {
 	
 	echo '<form action="?page=' . $contentURL . '&update" method="post">
 	 	<textarea type="text" name = "entryText" wrap="soft">';
-	include 'oscc/content/' . $contentURL;
+	include 'oscc/content/' . $contentURL . '.php';
 	echo '</textarea><br> 
 	 	Password: <input type="password" name="entryPassword" class="password"><br> 
 	 	<input type="submit" value="Submit"> 
 	 	</form>';
 }
 
-echo "</div>\n\n";
-
 ?>
+
+</div>

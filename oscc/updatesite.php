@@ -1,24 +1,22 @@
-<?php
+<?php // ### Updates data/structureData and/or files in content/.
 
-	if ($_POST['password'] != $password)
-		header("Location: ?page=" . $contentURL);
+// Only proceed if password hash matches.
+if (sha1(checkPost('password')) === $config['passwordHash']) {
 
-	$position 		= isset($_POST['newtitle']) ?
-						intval($_POST['position']) :
-						0;
-	$action 		= isset($_POST['action']) ?
-						($_POST['action']) :
-						null;
-	$newTitle 		= isset($_POST['newtitle']) ?
-						($_POST['newtitle']) :
-						null;
+	// Which line in navArray to work on.
+	$position 		= intval(checkPost('position'));
+
+	$action 		= checkPost('action');
+
+	$newTitle 		= checkPost('newtitle');
+
 	$tempArray		= $navArray;
 
 	switch ($action) {
 		
 		case 'delete':
 
-			$delFile 	= 'oscc/content/' . strtr($navArray[$position][1], ' ', '_');
+			$delFile 	= 'oscc/content/' . strtr($navArray[$position][1] . '.php', ' ', '_');
 			
 			$before 	= array_slice($navArray, 0, $position);
 			
@@ -41,7 +39,7 @@
 			arr2csv('data/structureData', $tempArray);
 
 			if ($navArray[$position][0] === '-')
-				rename('oscc/content/' . $oldTitle, 'oscc/content/' . strtr($newTitle, ' ', '_'));
+				rename('oscc/content/' . $oldTitle . '.php', 'oscc/content/' . strtr($newTitle, ' ', '_') . '.php');
 
 			break;
 
@@ -59,7 +57,7 @@
 
 			arr2csv('data/structureData', $tempArray);
 
-			$newFile 	= 'oscc/content/' . strtr($newTitle, ' ', '_');
+			$newFile 	= 'oscc/content/' . strtr($newTitle, ' ', '_') . '.php';
 				
 			fopen($newFile, 'w');
 				
@@ -135,5 +133,7 @@
 		default: break;
 
 	}
+
+}
 
 ?>
