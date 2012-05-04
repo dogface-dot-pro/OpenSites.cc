@@ -1,8 +1,8 @@
+<div class='edit'>
+
+<h2>Editing: <?php echo $contentTitle ?></h2>
+
 <?php
-
-echo "<div class='edit'>\n\n";
-
-echo "<h2>Editing: " . $contentTitle . "</h2>\n\n";
 
 if ($updateOn) {
 
@@ -29,13 +29,13 @@ if ($updateOn) {
 	
 	echo '<form action="?page=' . $contentURL . '&update" method="post">
 	 	<textarea type="text" name = "entryText" wrap="soft">';
-	include 'oscc/content/' . $contentURL;
+	include 'oscc/content/' . $contentURL . '.php';
 	echo '</textarea><br> 
 	 	Password: <input type="password" name="entryPassword" class="password"><br> 
 	 	<input type="submit" value="Submit"> 
 	 	</form>';
 }
 
-echo "</div>\n\n";
-
 ?>
+
+</div>

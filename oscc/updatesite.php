@@ -14,7 +14,7 @@ if (sha1(checkPost('password')) === $config['passwordHash']) {
 		
 		case 'delete':
 
-			$delFile 	= 'oscc/content/' . strtr($navArray[$position][1], ' ', '_');
+			$delFile 	= 'oscc/content/' . strtr($navArray[$position][1] . '.php', ' ', '_');
 			
 			$before 	= array_slice($navArray, 0, $position);
 			
@@ -37,7 +37,7 @@ if (sha1(checkPost('password')) === $config['passwordHash']) {
 			arr2csv('data/structureData', $tempArray);
 
 			if ($navArray[$position][0] === '-')
-				rename('oscc/content/' . $oldTitle, 'oscc/content/' . strtr($newTitle, ' ', '_'));
+				rename('oscc/content/' . $oldTitle . 'php', 'oscc/content/' . strtr($newTitle, ' ', '_') . '.php');
 
 			break;
 
@@ -55,7 +55,7 @@ if (sha1(checkPost('password')) === $config['passwordHash']) {
 
 			arr2csv('data/structureData', $tempArray);
 
-			$newFile 	= 'oscc/content/' . strtr($newTitle, ' ', '_');
+			$newFile 	= 'oscc/content/' . strtr($newTitle, ' ', '_') . '.php';
 				
 			fopen($newFile, 'w');
 				

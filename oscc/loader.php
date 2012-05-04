@@ -1,7 +1,7 @@
 <?php
 
 // Defines OScc functions and names globals from them.
-	include 'oscc/functions';
+	include 'oscc/functions.php';
 
 // Set site-wide variables.
 	$config = csv2kv('/data/siteData');
@@ -43,6 +43,6 @@
 	$updateOn = isset($_GET['update']);
 
 	if ($contentURL === $config['editPage'] AND $updateOn)
-		include 'oscc/updatesite';
+		include 'oscc/updatesite.php';
 
 ?>
