@@ -27,7 +27,7 @@
 	// Get settings for a normal page.
 	} else {
 
-		foreach($navArray as $lineArray) { // $la = line array.
+		foreach($navArray as $lineArray) {
 			// Set settings from line in structureData, if it matches $check 
 			// (or if it matches $config['defaultPage'], in case an invalid page was entered).
 			// NB, this currently only works if defaultPage is at the top of the nav menu...
