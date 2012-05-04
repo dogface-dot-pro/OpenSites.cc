@@ -1,0 +1,51 @@
+<?php
+
+// Defines OScc functions and names globals from them.
+	include 'oscc/functions';
+
+// Set site-wide variables.
+	$defaultPage 	= 'About'; 		// Default $contentURL.
+	$siteName 		= 'Dogface.pro';	// The site name.
+	$editPage 		= 'Edit_Site'; 	// Name of OScc-reserved site-editing page.
+	$password 		= 'dogface'; 	// Password for editing the site.
+
+// Set page-specific variables. ##
+
+	// Get 'page' variable from URL, filter it, store it as $check.
+        $check = isset($_GET['page']) ?
+                 strtr(filter_input(INPUT_GET, 'page'), '_', ' ') :
+                 $defaultPage;
+
+	$navArray = csv2arr('/data/structureData');
+
+	// Settings to load if on the edit page
+	// (since these aren't stored in structureData).
+	if ($check === strtr($editPage, '_', ' ')) {
+
+		$contentURL		= $editPage;
+		$contentTitle	= 'Edit Site';
+		$nav 			= 'siteEdNav';
+	
+	} else {
+
+		foreach($navArray as $la) { // $la = line array.
+			// Set settings from line in structureData, if it matches $check 
+			// (or $defaultPage, in case an invalid page was entered).
+			if ($la[0] === '-' AND ($la[1] === $check OR $la[1] === $defaultPage)) {
+				$contentURL 	= strtr($la[1], ' ', '_');
+				$contentTitle	= $la[1];
+				$nav 			= 'standardNav';
+			}
+		}
+	}
+
+	// Store whether 'edit' is set.
+	$editOn = isset($_GET['edit']);
+
+	// Store whether 'update' is set.
+	$updateOn = isset($_GET['update']);
+
+	if ($contentURL === $editPage AND $updateOn)
+		include 'oscc/updatesite';
+
+?>
