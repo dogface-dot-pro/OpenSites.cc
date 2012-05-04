@@ -10,7 +10,7 @@
 	Starts a form that finishes in the content. 
 -->
 
-<form action='?page=<?php echo $config['editPage'] ?>&update' method='post'>
+<form action='?page=<?php echo $config['editPage'] ?>&amp;update' method='post'>
 
 <div class='nav'>
 
