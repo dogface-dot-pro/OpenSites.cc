@@ -10,7 +10,7 @@
 	Starts a form that finishes in the content. 
 -->
 
-<form action='?page=<?php echo $config['editPage'] ?>&update' method='post'>
+<form action='?page=<?php echo $config['editPage'] ?>&amp;update' method='post'>
 
 <div class='nav'>
 
@@ -18,11 +18,9 @@
 
 <?php
 
-	// Track which line of $navArray we're on, so the radio button can send it.
-	$position = 0;
-
 	// Same as normal nav menu but with radio buttons.
-	foreach ($navArray as $la) { // la = Line Array.
+	// FIXME: don't echo HTML; <h3> is not valid within <ul> (do <li class="section"> or <li><h3>...)
+	foreach ($navArray as $position => $la) { // la = Line Array, position is line number
 
 		$title = $la[1];
 
@@ -34,8 +32,6 @@
 			$lineString = '';
 
 		echo $lineString;
-
-		$position = $position + 1;
 	
 	}
 
