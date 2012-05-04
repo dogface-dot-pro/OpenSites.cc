@@ -12,7 +12,7 @@ if ($updateOn) {
 	// if password hash matches, write text from $_POST into page's file.
  	if (sha1(checkPost('entryPassword')) === $config['passwordHash']) {
  		
-		file_put_contents('oscc/content/' . $contentURL, $entryText);
+		file_put_contents('oscc/content/' . $contentURL . '.php', $entryText);
 
  		echo '<a href="?page=' . $contentURL . '"><div class="alert">Update successful!</div></a>' . "\n\n";
  	
