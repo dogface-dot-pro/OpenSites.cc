@@ -6,7 +6,9 @@
 
 </div></a>
 
-<!-- Nav Menu -->
+<!-- Nav Menu 
+	Starts a form that finishes in the content. 
+-->
 
 <form action='?page=<?php echo $config['editPage'] ?>&update' method='post'>
 
@@ -16,8 +18,10 @@
 
 <?php
 
+	// Track which line of $navArray we're on, so the radio button can send it.
 	$position = 0;
 
+	// Same as normal nav menu but with radio buttons.
 	foreach ($navArray as $la) { // la = Line Array.
 
 		$title = $la[1];

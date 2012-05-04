@@ -1,7 +1,6 @@
 <?php
 	
 	// Converts a CSV file into an array.
-
 	function csv2arr($path) {
 		$file 			= fopen('oscc/' . $path, 'r') or die ("Can't open file oscc/" . $path);
 		$resultsArray	= array();
@@ -16,7 +15,6 @@
 
 	// Converts a CSV file into key-value array 
 	// (uses first two values of each line).
-
 	function csv2kv ($path) {
 		$file 			= fopen('oscc/' . $path, 'r') or die ("Can't open file oscc/" . $path);
 		$resultsArray	= array();
@@ -30,7 +28,6 @@
 	};
 
 	// Writes an $array into a file at $path.
-
 	function arr2csv($path, $array) {
 
 		$file = fopen('oscc/' . $path, 'w');
@@ -42,6 +39,7 @@
 		fclose($file);
 	};
 
+	// Returns a POST-value if it exists, runs stripslashes if needed.
 	function checkPost($input) {
 
 		if (isset($_POST[$input]) AND !empty($_POST[$input])) {
@@ -54,4 +52,3 @@
 	};
 
 ?>
-

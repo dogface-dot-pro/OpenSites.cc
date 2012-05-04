@@ -4,17 +4,15 @@
 
 <?php
 
+// if &update is in URL...
 if ($updateOn) {
 
 	$entryText = checkPost('entryText');
 
+	// if password hash matches, write text from $_POST into page's file.
  	if (sha1(checkPost('entryPassword')) === $config['passwordHash']) {
  		
- 		$editFile = fopen('oscc/content/' . $contentURL, "w");
- 		
- 		fclose($editFile);
-
- 		file_put_contents('oscc/content/' . $contentURL, $entryText);
+		file_put_contents('oscc/content/' . $contentURL, $entryText);
 
  		echo '<a href="?page=' . $contentURL . '"><div class="alert">Update successful!</div></a>' . "\n\n";
  	
@@ -24,7 +22,8 @@ if ($updateOn) {
  	
  	}
 
-
+// If &update is not set, make a form with a textarea, password box.
+// Fill textarea with current page contents.
 } else {
 	
 	echo '<form action="?page=' . $contentURL . '&update" method="post">

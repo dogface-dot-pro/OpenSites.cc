@@ -14,8 +14,11 @@
 
 <?php
 
+	// For each line in $navArray (NB, each line is an array),
+	// echo a <li> for pages or an <h3> for titles.
 	foreach ($navArray as $la) {
 
+		// Set <li> class to 'current' if it is the current page.
 		$liClass = ($la[1] === $contentTitle) ?
 			' class="current"' :
 			'';

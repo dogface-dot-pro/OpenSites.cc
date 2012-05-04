@@ -1,9 +1,9 @@
 <?php
 
-// Defines OScc functions and names globals from them.
-	include 'oscc/functions.php';
+// Defines OScc functions: csv2arr, arr2csv, csv2kv, checkPost.
+	require 'oscc/functions.php';
 
-// Set site-wide variables.
+// Load site-wide variables into a K=>V array: defaultPage, siteName, editPage, userName, passwordHash.
 	$config = csv2kv('/data/siteData');
 
 // Set page-specific variables. ##
@@ -13,9 +13,10 @@
  		strtr(filter_input(INPUT_GET, 'page'), '_', ' ') :
  		$defaultPage;
 
+ 	// Make a 2-D array of the site's structure/nav data.
 	$navArray = csv2arr('/data/structureData');
 
-	// Settings to load if on the edit page
+	// Settings to load if on the site edit page
 	// (since these aren't stored in structureData).
 	if ($check === strtr($config['editPage'], '_', ' ')) {
 
@@ -23,14 +24,16 @@
 		$contentTitle	= 'Edit Site';
 		$nav 			= 'siteEdNav';
 	
+	// Get settings for a normal page.
 	} else {
 
-		foreach($navArray as $la) { // $la = line array.
+		foreach($navArray as $lineArray) { // $la = line array.
 			// Set settings from line in structureData, if it matches $check 
-			// (or $config['defaultPage'], in case an invalid page was entered).
-			if ($la[0] === '-' AND ($la[1] === $check OR $la[1] === $config['defaultPage'])) {
-				$contentURL 	= strtr($la[1], ' ', '_');
-				$contentTitle	= $la[1];
+			// (or if it matches $config['defaultPage'], in case an invalid page was entered).
+			// NB, this currently only works if defaultPage is at the top of the nav menu...
+			if ($lineArray[0] === '-' AND ($lineArray[1] === $check OR $lineArray[1] === $config['defaultPage'])) {
+				$contentURL 	= strtr($lineArray[1], ' ', '_');
+				$contentTitle	= $lineArray[1];
 				$nav 			= 'standardNav';
 			}
 		}
@@ -42,7 +45,8 @@
 	// Store whether 'update' is set.
 	$updateOn = isset($_GET['update']);
 
+	// If we just submitted a change in the site edit page...
 	if ($contentURL === $config['editPage'] AND $updateOn)
-		include 'oscc/updatesite.php';
+		require 'oscc/updatesite.php';
 
 ?>

@@ -1,7 +1,9 @@
-<?php
+<?php // ### Updates data/structureData and/or files in content/.
 
+// Only proceed if password hash matches.
 if (sha1(checkPost('password')) === $config['passwordHash']) {
 
+	// Which line in navArray to work on.
 	$position 		= intval(checkPost('position'));
 
 	$action 		= checkPost('action');
@@ -37,7 +39,7 @@ if (sha1(checkPost('password')) === $config['passwordHash']) {
 			arr2csv('data/structureData', $tempArray);
 
 			if ($navArray[$position][0] === '-')
-				rename('oscc/content/' . $oldTitle . 'php', 'oscc/content/' . strtr($newTitle, ' ', '_') . '.php');
+				rename('oscc/content/' . $oldTitle . '.php', 'oscc/content/' . strtr($newTitle, ' ', '_') . '.php');
 
 			break;
 
