@@ -10,7 +10,7 @@
 
 	// Get 'page' variable from URL, filter it, store it as $check.
 	$check = isset($_GET['page']) ?
- 		filter_input(INPUT_GET, 'page', FILTER_SANITIZE_ENCODED), '_', ' ') :
+ 		strtr(filter_input(INPUT_GET, 'page'), '_', ' ') :
  		$defaultPage;
 
  	// Make a 2-D array of the site's structure/nav data.

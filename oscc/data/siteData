@@ -1,5 +1,6 @@
-defaultPage,About,Name of the default page to load.
-siteName,My OpenSite,Title of the site.
-editPage,Edit_Site,Name of the site-editing page (reserved for OScc).
-username,Admin,Admin Username
+defaultPage,About
+siteName,"My OpenSite"
+editPage,Edit_Site
+username,Admin
 passwordHash,10e250456dcd1f35adb654b0b3e3930d44e81ff8
+,

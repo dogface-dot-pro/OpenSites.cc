@@ -25,10 +25,20 @@ if ($updateOn) {
 // If &update is not set, make a form with a textarea, password box.
 // Fill textarea with current page contents.
 } else {
+
+	$path = 'oscc/content/' . $contentURL . '.php';
+
+	$file = fopen($path, 'r');
+
+	$output = file_get_contents('oscc/content/' . $contentURL . '.php');
+
+	fclose($file);
 	
-	echo '<form action="?page=' . $contentURL . '&update" method="post">
+	echo '<form action="?page=' . $contentURL . '&amp;update" method="post">
 	 	<textarea type="text" name = "entryText" wrap="soft">';
-	include 'oscc/content/' . $contentURL . '.php';
+
+	echo $output;
+
 	echo '</textarea><br> 
 	 	Password: <input type="password" name="entryPassword" class="password"><br> 
 	 	<input type="submit" value="Submit"> 
