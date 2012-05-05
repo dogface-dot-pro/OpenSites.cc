@@ -198,3 +198,35 @@ div.stopEdit {
 span.stopEdit {
   margin-left: 5px;
 }
+
+div.sitesettings {
+  text-indent: 0;
+  background: #ccc;
+  padding: 5px;
+  width: 400px;
+}
+
+div.sitesettings ul {
+  list-style-type: none;
+  margin: 3px;
+  padding: 0px;
+}
+
+div.sitesettings li {
+  background: white;
+  margin: 5px;
+  padding: 3px;
+  border-left: 15px solid #444;
+  -webkit-box-shadow: 0 0 8px #AAA;
+}
+
+div.sitesetspw {
+  border: 1px solid #888;
+  padding: 3px;
+}
+
+div.newtitlesnote {
+  font-size: small;
+  color: #777;
+  margin: 4px;
+}

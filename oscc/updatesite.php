@@ -12,6 +12,29 @@ if (sha1(checkPost('password')) === $config['passwordHash']) {
 
 	$tempArray		= $navArray;
 
+	// Site Settings
+
+	$newSiteName 	= checkPost('newSiteName');
+
+	$newPass = checkPost('newPass1');
+
+	// If newPass1 is set and matches newPass2, set passwordHash to new hash.
+	if ($newPass != null && $newPass === checkPost('newPass2')) {
+		
+		$config['passwordHash'] = sha1($newPass);
+		
+		kv2csv('data/siteData', $config);
+	
+	}
+
+	// Change siteName if it's set.
+	if ($newSiteName != null) {
+
+		$config['siteName'] = $newSiteName;
+		
+		kv2csv('data/siteData', $config);
+	}
+
 	switch ($action) {
 		
 		case 'delete':

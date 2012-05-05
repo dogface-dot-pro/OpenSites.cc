@@ -39,6 +39,19 @@
 		fclose($file);
 	};
 
+	// Writes a k=>v array to a CSV.
+	function kv2csv($path, $array) {
+
+		$file = fopen('oscc/' . $path, 'w');
+
+		foreach ($array as $k => $v) {
+			fputcsv($file, array($k, $v));
+		}
+
+		fclose($file);
+
+	};
+
 	// Returns a POST-value if it exists, runs stripslashes if needed.
 	function checkPost($input) {
 
@@ -50,5 +63,6 @@
 		} else
 			return null;
 	};
+	
 
 ?>
