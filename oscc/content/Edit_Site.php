@@ -16,10 +16,11 @@
 		New Title: <input type="text" name="newtitle"></input></br>
 		<hr>
 		<h3>Site settings</h3>
-		<li>Site name: <input type="text" name="newSiteName"></input></li><br>
-		<li>Change password: <input type="password" name="newPass1"></input></li>
-		<li>Confirm Password: <input type="password" name="newPass2"></input></li>
+		<li>Site name: <input type="text" name="newSiteName" autocomplete="off"></input></li><br>
+		<li>Change password: <input type="password" name="newPass1" autocomplete="off"></input></li>
+		<li>Confirm Password: <input type="password" name="newPass2" autocomplete="off"></input></li>
 		</ul><ul>
+		Username: <input type="text" name="username" value="Admin"></input><br>
 		Password: <input type="password" name="password"></input><br>
 		<input type="submit" name="submit" value="Submit"></input>
 
@@ -27,6 +28,6 @@
 
 </div>
 
-<p><span class='arrow'>&uarr;</span> Enter password, click 'Submit'.</p>
+<p><span class='arrow'>&uarr;</span> Enter username and password, click 'Submit'.</p>
 
 </form>

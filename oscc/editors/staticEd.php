@@ -33,7 +33,8 @@ if ($updateOn) {
 
 	echo $output;
 
-	echo '</textarea><br> 
+	echo '</textarea><br>
+		Username: <input type="text" name="username" value="Admin"></input><br> 
 	 	Password: <input type="password" name="entryPassword" class="password"><br> 
 	 	<input type="submit" value="Submit"> 
 	 	</form>';
