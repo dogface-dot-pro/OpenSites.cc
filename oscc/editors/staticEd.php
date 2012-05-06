@@ -1,7 +1,3 @@
-<div class='edit'>
-
-<h2>Editing: <?php echo $contentTitle ?></h2>
-
 <?php
 
 // if &update is in URL...
@@ -14,9 +10,15 @@ if ($updateOn) {
  		
 		file_put_contents('oscc/content/' . $contentURL . '.php', $entryText);
 
- 		echo '<a href="?page=' . $contentURL . '"><div class="alert">Update successful!</div></a>' . "\n\n";
+ 		header("url:?page=$contentURL");
+
+ 		//echo '<a href="?page=' . $contentURL . '"><div class="alert">Update successful!</div></a>' . "\n\n";
  	
  	} else {
+
+ 		echo "<div class='edit'>";
+
+		echo "<h2>Editing: $contentTitle</h2>";
  		
  		echo '<a href="?page=' . $contentURL . '&edit"><div class="alert">Incorrect Password! Try again?</div></a>' . "\n\n";
  	
@@ -25,6 +27,10 @@ if ($updateOn) {
 // If &update is not set, make a form with a textarea, password box.
 // Fill textarea with current page contents.
 } else {
+
+	echo "<div class='edit'>";
+
+	echo "<h2>Editing: <?php echo $contentTitle ?></h2>";
 
 	$output = file_get_contents('oscc/content/' . $contentURL . '.php');
 	
