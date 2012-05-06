@@ -1,7 +1,3 @@
-<div class='edit'>
-
-<h2>Editing: <?php echo $contentTitle ?></h2>
-
 <?php
 
 // if &update is in URL...
@@ -14,9 +10,15 @@ if ($updateOn) {
  		
 		file_put_contents('oscc/content/' . $contentURL . '.php', $entryText);
 
- 		echo '<a href="?page=' . $contentURL . '"><div class="alert">Update successful!</div></a>' . "\n\n";
+ 		header("url:?page=$contentURL");
+
+ 		//echo '<a href="?page=' . $contentURL . '"><div class="alert">Update successful!</div></a>' . "\n\n";
  	
  	} else {
+
+ 		echo "<div class='edit'>";
+
+		echo "<h2>Editing: $contentTitle</h2>";
  		
  		echo '<a href="?page=' . $contentURL . '&edit"><div class="alert">Incorrect Password! Try again?</div></a>' . "\n\n";
  	
@@ -26,20 +28,19 @@ if ($updateOn) {
 // Fill textarea with current page contents.
 } else {
 
-	$path = 'oscc/content/' . $contentURL . '.php';
+	echo "<div class='edit'>";
 
-	$file = fopen($path, 'r');
+	echo "<h2>Editing: <?php echo $contentTitle ?></h2>";
 
 	$output = file_get_contents('oscc/content/' . $contentURL . '.php');
-
-	fclose($file);
 	
 	echo '<form action="?page=' . $contentURL . '&amp;update" method="post">
 	 	<textarea type="text" name = "entryText" wrap="soft">';
 
 	echo $output;
 
-	echo '</textarea><br> 
+	echo '</textarea><br>
+		Username: <input type="text" name="username" value="Admin"></input><br> 
 	 	Password: <input type="password" name="entryPassword" class="password"><br> 
 	 	<input type="submit" value="Submit"> 
 	 	</form>';

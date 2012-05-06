@@ -1,0 +1,13 @@
+order allow,deny
+deny from all
+
+<Files .htaccess>
+ order allow,deny
+ deny from all
+</Files>
+
+# disable directory browsing
+Options All -Indexes
+
+# prevent folder listing
+IndexIgnore *

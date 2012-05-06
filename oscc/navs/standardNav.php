@@ -26,7 +26,7 @@
 		$title = $la[1];
 
 		if ($la[0] === '-')
-			$lineString = "\t<a href='?page=" . strtr($title, ' ', '_') . "'><li$liClass>$title</li></a>\n\n";
+			$lineString = "\t<a href='?page=" . toUrl($title) . "'><li$liClass>$title</li></a>\n\n";
 		else if ($la[0] === '#')
 			$lineString = "\t<h3>$title</h3>\n\n";
 		else
