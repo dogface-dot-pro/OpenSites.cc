@@ -26,13 +26,7 @@ if ($updateOn) {
 // Fill textarea with current page contents.
 } else {
 
-	$path = 'oscc/content/' . $contentURL . '.php';
-
-	$file = fopen($path, 'r');
-
 	$output = file_get_contents('oscc/content/' . $contentURL . '.php');
-
-	fclose($file);
 	
 	echo '<form action="?page=' . $contentURL . '&amp;update" method="post">
 	 	<textarea type="text" name = "entryText" wrap="soft">';

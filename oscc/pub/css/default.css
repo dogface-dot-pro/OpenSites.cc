@@ -220,11 +220,6 @@ div.sitesettings li {
   -webkit-box-shadow: 0 0 8px #AAA;
 }
 
-div.sitesetspw {
-  border: 1px solid #888;
-  padding: 3px;
-}
-
 div.newtitlesnote {
   text-indent: 2em;
   font-size: small;
