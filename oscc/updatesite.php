@@ -13,7 +13,6 @@ if (sha1(checkPost('password')) === $config['passwordHash']) {
 		$config['passwordHash'] = sha1($newPass);
 		
 		kv2csv('data/siteData', $config);
-	
 	}
 
 	// Change siteName if it's set.
@@ -28,8 +27,17 @@ if (sha1(checkPost('password')) === $config['passwordHash']) {
 
 	$position 		= intval(checkPost('position'));
 	$action 		= checkPost('action');
+	$newType 		= $navArray[$position][0];
+	
+	// Merge 'newpage' and 'newsection'
+	if ($action === 'newpage' || $action === 'newsection') {
+		$newType = ($action === 'newpage') ? '-' : '#';
+		$action = 'new';
+	}
+
 	$newTitle 		= checkPost('newtitle');
 	$newUrl			= toUrl($newTitle);
+	$newFile 		= 'oscc/content/' . $newUrl . '.php';
 	$tempArray		= $navArray;
 
 	switch ($action) {
@@ -43,11 +51,17 @@ if (sha1(checkPost('password')) === $config['passwordHash']) {
 
 			arr2csv('data/structureData', $tempArray);
 
-			unlink($delFile);
+			if ($newType === '-')
+				unlink($delFile);
 
 			break;
 
 		case 'rename':
+
+			foreach($navArray as $line) {
+				if ($line[0] === $newType && $line[1] === $newTitle)
+					break 2;
+			}
 
 			$oldTitle 					= $navArray[$position][2];
 			$tempArray[$position][1] 	= $newTitle;
@@ -60,32 +74,24 @@ if (sha1(checkPost('password')) === $config['passwordHash']) {
 
 			break;
 
-		case 'newpage':
+		case 'new':
+
+			foreach($navArray as $line) {
+				if ($line[0] === $newType && $line[1] === $newTitle)
+					break 2;
+			}
 
 			$before 	= array_slice($navArray, 0, $position + 1);
 			$after 		= array_slice($navArray, $position + 1);
-			$newType	= '-';
 			$new 		= array(array($newType, $newTitle, $newUrl));
 			$tempArray 	= array_merge($before, $new, $after);
-			$newFile 	= 'oscc/content/' . $newUrl . '.php';
 
 			arr2csv('data/structureData', $tempArray);
-				
-			fopen($newFile, 'w');
-				
-			fclose($newFile);
-
-			break;
-
-		case 'newsection':
-
-			$before 	= array_slice($navArray, 0, $position + 1);
-			$after 		= array_slice($navArray, $position + 1);
-			$newType	= '#';
-			$new 		= array(array($newType, $newTitle));
-			$tempArray 	= array_merge($before, $new, $after);
-
-			arr2csv('data/structureData', $tempArray);
+			
+			if ($newType === '-') {	
+				fopen($newFile, 'w');
+				fclose($newFile);
+			}
 
 			break;
 
