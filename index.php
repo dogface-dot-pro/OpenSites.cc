@@ -3,14 +3,14 @@
 	// Defines OScc-related functions:
 	//		csv2arr, arr2csv, csv2kv, checkPost.		
 	// Loads sitewide settings as variables: 
-	//		defaultPage, siteName, editPage, userName, passwordHash.
+	//		siteName, editPage, userName, passwordHash.
 	// Sets page-specific settings: 
 	//		$contentURL, $contentTitle, $editOn, $updateOn
 	// Loads nav data into $navArray.
 	require 'oscc/loader.php';
 
 	// If we just processed a change from the site-edit page, return to it.
-	if ($contentURL === $config['editPage'] AND $updateOn)
+	if ($contentURL === $config['editPage'] && $updateOn)
 		header("Location: ?page=" . $config['editPage']);
 
 ?>
@@ -37,7 +37,7 @@
 	include 'oscc/navs/' . $nav . '.php';
 
 	// Loads editing interface, if $editOn is 1.
-	if (($editOn OR $updateOn) AND $contentURL != $config['editPage']) {
+	if (($editOn || $updateOn) && $contentURL != $config['editPage']) {
 		echo "<!-- Editor -->\n\n";
 		include 'oscc/editors/staticEd.php';
 	}

@@ -55,7 +55,7 @@
 	// Returns a POST-value if it exists, runs stripslashes if needed.
 	function checkPost($input) {
 
-		if (isset($_POST[$input]) AND !empty($_POST[$input])) {
+		if (isset($_POST[$input]) && !empty($_POST[$input])) {
 			if (get_magic_quotes_gpc())
 				return stripslashes(filter_input(INPUT_POST, $input));
 			else 
@@ -69,7 +69,7 @@
 	function toUrl($input) {
 		
 		return ereg_replace("[^A-Za-z0-9_]", "", $input);
-		
+
 	};
 	
 

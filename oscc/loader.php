@@ -11,7 +11,7 @@
 	// Get 'page' variable from URL, filter it, store it as $check.
 	$check = isset($_GET['page']) ?
  		toUrl(filter_input(INPUT_GET, 'page')) :
- 		$config['defaultPage'];
+ 		null;
 
  	// Make a 2-D array of the site's structure/nav data.
 	$navArray = csv2arr('/data/structureData');
@@ -27,11 +27,10 @@
 	// Get settings for a normal page.
 	} else {
 
-		foreach($navArray as $lineArray) {
+		foreach($navArray as $position => $lineArray) {
 			// Set settings from line in structureData, if it matches $check 
-			// (or if it matches $config['defaultPage'], in case an invalid page was entered).
-			// NB, this currently only works if defaultPage is at the top of the nav menu...
-			if ($lineArray[0] === '-' AND ($lineArray[2] === $check OR $lineArray[2] === $config['defaultPage'])) {
+			// (or if it is first page in list, in case an invalid page was entered).
+			if ($lineArray[0] === '-' && ($lineArray[2] === $check || $position === 0)) {
 				$contentURL 	= $lineArray[2];
 				$contentTitle	= $lineArray[1];
 				$nav 			= 'standardNav';
@@ -46,7 +45,7 @@
 	$updateOn = isset($_GET['update']);
 
 	// If we just submitted a change in the site edit page...
-	if ($contentURL === $config['editPage'] AND $updateOn)
+	if ($contentURL === $config['editPage'] && $updateOn)
 		require 'oscc/updatesite.php';
 
 ?>
