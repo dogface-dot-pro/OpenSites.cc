@@ -10,15 +10,15 @@
 
 	// Get 'page' variable from URL, filter it, store it as $check.
 	$check = isset($_GET['page']) ?
- 		strtr(filter_input(INPUT_GET, 'page'), '_', ' ') :
- 		$defaultPage;
+ 		toUrl(filter_input(INPUT_GET, 'page')) :
+ 		$config['defaultPage'];
 
  	// Make a 2-D array of the site's structure/nav data.
 	$navArray = csv2arr('/data/structureData');
 
 	// Settings to load if on the site edit page
 	// (since these aren't stored in structureData).
-	if ($check === strtr($config['editPage'], '_', ' ')) {
+	if ($check === toUrl($config['editPage'])) {
 
 		$contentURL		= $config['editPage'];
 		$contentTitle	= 'Edit Site';
@@ -32,7 +32,7 @@
 			// (or if it matches $config['defaultPage'], in case an invalid page was entered).
 			// NB, this currently only works if defaultPage is at the top of the nav menu...
 			if ($lineArray[0] === '-' AND ($lineArray[1] === $check OR $lineArray[1] === $config['defaultPage'])) {
-				$contentURL 	= strtr($lineArray[1], ' ', '_');
+				$contentURL 	= $lineArray[2];
 				$contentTitle	= $lineArray[1];
 				$nav 			= 'standardNav';
 			}

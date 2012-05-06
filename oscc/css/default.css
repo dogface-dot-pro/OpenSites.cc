@@ -226,7 +226,8 @@ div.sitesetspw {
 }
 
 div.newtitlesnote {
+  text-indent: 2em;
   font-size: small;
   color: #777;
-  margin: 4px;
+  margin-top: -10px;
 }

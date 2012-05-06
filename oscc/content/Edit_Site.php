@@ -1,6 +1,7 @@
-<p><span class='arrow'>&larr;</span> Select a page/title.</p>
+<p><span class='arrow'>&larr;</span> Select a page/section, if needed.</p>
+<div class="newtitlesnote">New pages/sections are placed after the selected one.</div>
 
-<p><span class='arrow'>&darr;</span> Select an action.</p>
+<p><span class='arrow'>&darr;</span> Select an action or change a site setting.</p>
 
 <div class="siteEdActions">
 
@@ -12,8 +13,6 @@
 		<li><input type="radio" name="action" value="rename">Rename</input></li>
 		<li><input type="radio" name="action" value="moveup">Move up</input></li>
 		<li><input type="radio" name="action" value="movedown">Move down</input></li>
-		<li><input type="radio" name="action" value="default">Make default page</input></li>
-		<div class="newtitlesnote">New pages/titles are placed after the selected one.</div>
 		New Title: <input type="text" name="newtitle"></input></br>
 		<hr>
 		<h3>Site settings</h3>

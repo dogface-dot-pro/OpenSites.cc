@@ -57,11 +57,19 @@
 
 		if (isset($_POST[$input]) AND !empty($_POST[$input])) {
 			if (get_magic_quotes_gpc())
-				return (string) stripslashes($_POST[$input]);
+				return stripslashes(filter_input(INPUT_POST, $input));
 			else 
-				return (string) $_POST($input);
+				return filter_input(INPUT_POST, $input);
 		} else
 			return null;
+	};
+
+
+	// Converts a title into a URL-safe string - only alphanumeric and _.
+	function toUrl($input) {
+		
+		return ereg_replace("[^A-Za-z0-9_]", "", $input);
+		
 	};
 	
 

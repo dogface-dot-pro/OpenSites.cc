@@ -3,19 +3,8 @@
 // Only proceed if password hash matches.
 if (sha1(checkPost('password')) === $config['passwordHash']) {
 
-	// Which line in navArray to work on.
-	$position 		= intval(checkPost('position'));
-
-	$action 		= checkPost('action');
-
-	$newTitle 		= checkPost('newtitle');
-
-	$tempArray		= $navArray;
-
-	// Site Settings
-
+	// ####### Site-settings
 	$newSiteName 	= checkPost('newSiteName');
-
 	$newPass = checkPost('newPass1');
 
 	// If newPass1 is set and matches newPass2, set passwordHash to new hash.
@@ -35,16 +24,21 @@ if (sha1(checkPost('password')) === $config['passwordHash']) {
 		kv2csv('data/siteData', $config);
 	}
 
+	// ####### Page changes
+
+	$position 		= intval(checkPost('position'));
+	$action 		= checkPost('action');
+	$newTitle 		= checkPost('newtitle');
+	$newUrl			= toUrl($newTitle);
+	$tempArray		= $navArray;
+
 	switch ($action) {
 		
 		case 'delete':
 
-			$delFile 	= 'oscc/content/' . strtr($navArray[$position][1] . '.php', ' ', '_');
-			
+			$delFile 	= 'oscc/content/' . $navArray[$position][2] . '.php';
 			$before 	= array_slice($navArray, 0, $position);
-			
 			$after 		= array_slice($navArray, $position + 1);
-			
 			$tempArray 	= array_merge($before, $after);
 
 			arr2csv('data/structureData', $tempArray);
@@ -55,32 +49,27 @@ if (sha1(checkPost('password')) === $config['passwordHash']) {
 
 		case 'rename':
 
-			$oldTitle = strtr($navArray[$position][1], ' ', '_');
-
-			$tempArray[$position][1] = $newTitle;
+			$oldTitle 					= $navArray[$position][2];
+			$tempArray[$position][1] 	= $newTitle;
+			$tempArray[$position][2] 	= toUrl($newTitle);
 
 			arr2csv('data/structureData', $tempArray);
 
 			if ($navArray[$position][0] === '-')
-				rename('oscc/content/' . $oldTitle . '.php', 'oscc/content/' . strtr($newTitle, ' ', '_') . '.php');
+				rename('oscc/content/' . $oldTitle . '.php', 'oscc/content/' . $newUrl . '.php');
 
 			break;
 
 		case 'newpage':
 
 			$before 	= array_slice($navArray, 0, $position + 1);
-
-			$newType	= '-';
-
-			$new 		= array(array($newType, $newTitle));
-			
 			$after 		= array_slice($navArray, $position + 1);
-			
+			$newType	= '-';
+			$new 		= array(array($newType, $newTitle, $newUrl));
 			$tempArray 	= array_merge($before, $new, $after);
+			$newFile 	= 'oscc/content/' . $newUrl . '.php';
 
 			arr2csv('data/structureData', $tempArray);
-
-			$newFile 	= 'oscc/content/' . strtr($newTitle, ' ', '_') . '.php';
 				
 			fopen($newFile, 'w');
 				
@@ -91,24 +80,12 @@ if (sha1(checkPost('password')) === $config['passwordHash']) {
 		case 'newsection':
 
 			$before 	= array_slice($navArray, 0, $position + 1);
-
-			$newType	= '#';
-
-			$new 		= array(array($newType, $newTitle));
-			
 			$after 		= array_slice($navArray, $position + 1);
-			
+			$newType	= '#';
+			$new 		= array(array($newType, $newTitle));
 			$tempArray 	= array_merge($before, $new, $after);
 
 			arr2csv('data/structureData', $tempArray);
-
-			break;
-
-		case 'edit':
-
-			$url = strtr($navArray[$position][1], ' ', '_');
-
-			header("location: ?page=" . $url . "&edit");
 
 			break;
 
@@ -118,9 +95,7 @@ if (sha1(checkPost('password')) === $config['passwordHash']) {
 				break;
 
 			$tempLine 					= $navArray[$position];
-
 			$tempArray[$position] 		= $navArray[$position - 1];
-
 			$tempArray[$position - 1] 	= $tempLine;
 
 			arr2csv('data/structureData', $tempArray);
@@ -136,20 +111,10 @@ if (sha1(checkPost('password')) === $config['passwordHash']) {
 			}
 
 			$tempLine 					= $navArray[$position];
-
 			$tempArray[$position] 		= $navArray[$position + 1];
-
 			$tempArray[$position + 1]	= $tempLine;
 
 			arr2csv('data/structureData', $tempArray);
-
-			break;
-
-		case 'edit':
-
-			$newPage = strtr($navArray[$position][1], ' ', '_');
-
-			header("Location: ?page=$newPage&edit");
 
 			break;
 
