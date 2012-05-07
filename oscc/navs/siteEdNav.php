@@ -1,6 +1,6 @@
 <!-- Title Bar -->
 
-<a href='/'><div class='titleBar'>
+<a href="/"><div class="titleBar">
 
 <h1><?php echo $config['siteName'] ?></h1>
 
@@ -10,9 +10,9 @@
 	Starts a form that finishes in the content. 
 -->
 
-<form action='?page=<?php echo $config['editPage'] ?>&amp;update' method='post'>
+<form action="?page=Edit_Site&amp;update" method="post">
 
-<div class='nav'>
+<div class="nav">
 
 <ul>
 

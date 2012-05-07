@@ -39,7 +39,7 @@
 
 <div class=editButtons>
 
-<a href='?page=<?php echo $contentURL ?>&edit'>Edit page</a> | <a href='?page=<?php echo $config['editPage'] ?>'>Edit Site</a>
+<a href='?page=<?php echo $contentURL ?>&amp;edit'>Edit page</a> | <a href="?page=Edit_Site">Edit Site</a>
 
 </div>
 

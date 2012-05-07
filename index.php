@@ -7,11 +7,12 @@
 	// Sets page-specific settings: 
 	//		$contentURL, $contentTitle, $editOn, $updateOn
 	// Loads nav data into $navArray.
+	// Sets $loggedIn if user is logged in.
 	require 'oscc/loader.php';
 
 	// If we just processed a change from the site-edit page, return to it.
-	if ($contentURL === $config['editPage'] && $updateOn)
-		header("Location: ?page=" . $config['editPage']);
+	if ($contentURL === 'Edit_Site' && $updateOn)
+		header("Location: ?page=Edit_Page");
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
@@ -37,7 +38,7 @@
 	include 'oscc/navs/' . $nav . '.php';
 
 	// Loads editing interface, if $editOn is 1.
-	if (($editOn || $updateOn) && $contentURL != $config['editPage']) {
+	if ($editOn || ($updateOn && $canEdit)) {
 		echo "<!-- Editor -->\n\n";
 		include 'oscc/editors/staticEd.php';
 	}
@@ -51,7 +52,7 @@
 <h2><?php echo $contentTitle ?></h2>
 <?php
 
-	include 'oscc/content/' . $contentURL . '.php';
+	include $contentPath;
 
 ?>
 </div>
