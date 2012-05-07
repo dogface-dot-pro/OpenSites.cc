@@ -15,13 +15,13 @@
 
 	// Start session, load login.class, instantiate a Login object,
  	// use it to set $loggedIn to TRUE or FALSE.
-	//session_start();
+	session_start();
 	
-	//require("Login.class.php");
+	require("Login.class.php");
 	
-	//$login = new Login;
+	$login = new Login();
 
-	//$loggedIn = $login->checkAuth();
+	$loggedIn = $login->checkAuth();
 
 	// Make a 2-D array of the site's structure/nav data,
 	// only showing private pages if $loggedIn is TRUE.
@@ -29,7 +29,7 @@
 
 	// Settings to load if on the site edit page
 	// (since these aren't stored in structureData).
-	if ($check === 'Edit_Site') {
+	if ($check === 'Edit_Site' && $loggedIn) {
 
 		$contentURL		= 'Edit_Site';
 		$contentTitle	= 'Edit Site';
@@ -62,10 +62,10 @@
 	}
 
 	// Store whether 'edit' is set.
-	$editOn = (isset($_GET['edit']) && $canEdit === TRUE);
+	$editOn = (isset($_GET['edit']) && $canEdit && $loggedIn);
 
 	// Store whether 'update' is set.
-	$updateOn = isset($_GET['update']);
+	$updateOn = (isset($_GET['update']) && $loggedIn);
 
 	// If we just submitted a change in the site edit page...
 	if ($contentURL === 'Edit_Site' && $updateOn)

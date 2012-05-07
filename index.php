@@ -12,7 +12,7 @@
 
 	// If we just processed a change from the site-edit page, return to it.
 	if ($contentURL === 'Edit_Site' && $updateOn)
-		header("Location: ?page=Edit_Page");
+		header("Location: ?page=Edit_Site");
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 

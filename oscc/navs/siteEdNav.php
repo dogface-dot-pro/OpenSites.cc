@@ -39,7 +39,7 @@
 
 <div class=editButtons>
 
-<a href='/'>Stop Editing</a>
+<a href='?page'>Stop Editing</a>
 
 </div>
 

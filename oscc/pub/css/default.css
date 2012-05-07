@@ -117,10 +117,11 @@ div.nav a {
   color: #444; 
 }
 
-div.editButtons {
+div.editButtons p {
+  text-indent: none;
   font-size: small;
   margin: 0;
-  padding: 3px;
+  padding: 0;
 }
 
 /* EDIT */

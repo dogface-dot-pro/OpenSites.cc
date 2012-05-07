@@ -35,11 +35,25 @@
 		echo $lineString;
 	}
 
+	// Check whether to show 'Login' or edit buttons.
+	$editText = "<p><a href='?page=$contentURL&amp;edit'>Edit page</a> | <a href='?page=Edit_Site'>Edit Site</a></p>";
+
+	$loginText = ($loggedIn) ?
+		"<p><a href='?page=$contentURL&amp;logout'>Logout</a></p>" :
+		"<p><a href='?page=Login'>Login</a></p>";
+
 ?>
 
 <div class=editButtons>
 
-<a href='?page=<?php echo $contentURL ?>&amp;edit'>Edit page</a> | <a href="?page=Edit_Site">Edit Site</a>
+<?php 
+
+	if ($loggedIn)
+		echo $editText;
+
+	echo $loginText;
+
+?>
 
 </div>
 
