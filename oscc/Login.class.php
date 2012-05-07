@@ -13,6 +13,7 @@ define('LOGIN_PASSHASH', $config['passwordHash']);
 //		otherwise returns FALSE and destroys session.
 class Login {
 
+
 	// Days "remember me" cookies will remain
 	var $cookie_duration = 21;
 
@@ -20,7 +21,7 @@ class Login {
 	var $user = "";
 	var $pass = "";
 
-	var $loggedIn = FALSE;
+	var $loggedIn;
 
 
 
@@ -29,20 +30,16 @@ class Login {
 // POSTs action=set_login, user, pass, remember, to this script.
 function prompt () {
 
-	$this->destroySession();
-
 	//print login form.
 	?>
 	<div class="login">
 
-		<form action="" method="post">
+		<form action="?login" method="post">
 		<p><input type="hidden" name="action" value="set_login"></p>
 
 		<h3>Enter Login Info:</h3>
 		<p><label for="user">Username:</label> <input type="text" name="user" id="user"></p>
 		<p><label for="pass">Password:</label> <input type="password" name="pass" id="pass"></p>
-
-		<p><input type="checkbox" name="remember" id="remember"> <label for="remember">Remember me on this computer</label></p>
 
 		<input type="submit" value="Login">
 
@@ -63,11 +60,7 @@ function checkPrompt() {
 	$okay = $this->checkDetails();
 
 	if ($okay) {
-
-		// If 'Remember me' was ticked, set cookie.
-		if(isset($_POST['remember']))
-			setcookie("login_user", $this->user);
-			
+	
 		$this->approveSession();
 
 	} else {	
@@ -91,11 +84,6 @@ function approveSession() {
 	$_SESSION['login_user'] = $this->user;
 	$_SESSION['login_pass'] = $this->pass;
 
-	// Renew cookies if they already exist.
-	if(isset($_COOKIE[$this->prefix.'user'])) {
-		setcookie("login_user", $this->user, time()+($this->cookie_duration*86400));// (d*24h*60m*60s)
-		setcookie("login_pass", $this->pass, time()+($this->cookie_duration*86400));// (d*24h*60m*60s)
-	}
 }
 
 // Destroy existing cookies login_user and login_pass, bys setting time in past; end session.
@@ -103,12 +91,6 @@ function destroySession() {
 
 	$this->loggedIn = FALSE;
 
-	if (!empty($_COOKIE[$this->prefix.'user'])) 
-		setcookie("login_user", "blanked", time()-(3600*25));
-		
-	if(!empty($_COOKIE[$this->prefix.'pass'])) 
-		setcookie("login_pass", "blanked", time()-(3600*25));
-	
 	session_unset();
 }
 
@@ -117,15 +99,9 @@ function destroySession() {
 function checkAuth() {
 
 	// If processing from prompt()...
-	if(isset($_POST['action']) && $_POST['action'] == "set_login")
+	if(isset($_GET['login']))
 		$this->checkPrompt();
 
-	// Save cookie info to session, if available.
-	if (isset($_COOKIE['login_user'])) {
-
-		$_SESSION['login_user'] = $_COOKIE['login_user'];
-		$_SESSION['login_pass'] = $_COOKIE['login_pass'];
-	}
 
 	// Set object variables to session variables.
 	if (isset($_SESSION['login_user'])) {

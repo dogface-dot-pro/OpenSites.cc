@@ -22,7 +22,7 @@ if ($updateOn) {
 
 	<?php $output = file_get_contents('oscc/content/' . $contentURL . '.php'); ?>
 	
-	<form action="?page=' . $contentURL . '&amp;update" method="post">
+	<form action="?page=<?php echo $contentURL ?>&amp;update" method="post">
 	<textarea type="text" name = "entryText" wrap="soft"><?php 
 		echo $output; 
 	?></textarea><br>
