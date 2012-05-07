@@ -7,7 +7,7 @@ $newPass = checkPost('newPass1');
 // If newPass1 is set and matches newPass2, set passwordHash to new hash.
 if ($newPass != null && $newPass === checkPost('newPass2')) {
 	
-	$config['passwordHash'] = sha1($newPass);
+	$config['passwordHash'] = sha1(sha1('Admin') . $newPass);
 	
 	kv2csv('data/siteData', $config);
 }
