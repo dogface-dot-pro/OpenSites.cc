@@ -7,17 +7,19 @@
 
 	<ul>
 		<h3>Actions</h3>
-		<li><input type="radio" name="action" value="newpage">New Page</input></li>
-		<li><input type="radio" name="action" value="newsection">New Section</input></li>
-		<li><input type="radio" name="action" value="delete">Delete</input></li>
-		<li><input type="radio" name="action" value="rename">Rename</input></li>
-		<li><input type="radio" name="action" value="moveup">Move up</input></li>
-		<li><input type="radio" name="action" value="movedown">Move down</input></li>
-		New Title: <input type="text" name="newtitle"></input></br>
+		<li><input type="radio" name="action" id ="newpage" value="newpage">		<label for="newpage">New Page</label></li>
+		<li><input type="radio" name="action" id="newsection" value="newsection">	<label for="newsection">New Section</label></li>
+		<li><input type="radio" name="action" id="moveup" value="moveup">			<label for="moveup">Move Up</label></li>	
+		<li><input type="radio" name="action" id="movedown" value="movedown">		<label for="movedown">Move Down</label></li>
+		<li><input type="radio" name="action" id="setprivacy" value="setprivacy">	<label for="setprivacy">Set Privacy</label></li>		
+		<li><input type="radio" name="action" id="delete" value="delete">			<label for="delete">Delete</label></li>
+		<li><input type="radio" name="action" id="rename" value="rename">			<label for="rename">Rename</label></li>
+		New Title:<input type="text" name="newtitle"></input></br>
+		Private?: <input type="checkbox" name="private"></input></br>
 		<hr>
-		<h3>Site settings</h3>
-		<li>Site name: <input type="text" name="newSiteName" autocomplete="off"></input></li><br>
-		<li>Change password: <input type="password" name="newPass1" autocomplete="off"></input></li>
+		<h3>Site Settings</h3>
+		<li>Change Site Name: <input type="text" name="newSiteName" value="<?php echo $config['siteName'] ?>"></input></li><br>
+		<li>Set New Password: <input type="password" name="newPass1" autocomplete="off"></input></li>
 		<li>Confirm Password: <input type="password" name="newPass2" autocomplete="off"></input></li>
 	</ul>
 	<input type="submit" name="submit" value="Submit">

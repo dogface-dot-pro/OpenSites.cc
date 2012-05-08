@@ -3,7 +3,7 @@
 // Defines OScc functions: csv2arr, arr2csv, csv2kv, checkPost.
 	require 'oscc/functions.php';
 
-// Load site-wide variables into a K=>V array: defaultPage, siteName, editPage, userName, passwordHash.
+// Load site-wide variables into a K=>V array: siteName, passwordHash.
 	$config = csv2kv('/data/siteData');
 
 // Set page-specific variables. ##
@@ -51,15 +51,16 @@
 		foreach($navArray as $position => $lineArray) {
 			// Set settings from line in structureData, if it matches $check 
 			// (or if it is first page in list, in case an invalid page was entered).
-			if ($lineArray[0] === '-' && ($lineArray[2] === $check || $position === 0)) {
-				$contentURL 	= $lineArray[2];
-				$contentTitle	= $lineArray[1];
-				$contentPath	= 'oscc/content/' . $contentURL . '.php';
-				$nav 			= 'standardNav';
-				$canEdit		= TRUE;
+			if ($lineArray[1] === '-' && ($lineArray[3] === $check || $position === 0)) {
+					$contentURL 	= $lineArray[3];
+					$contentTitle	= $lineArray[2];
+					$contentPath	= 'oscc/content/' . $contentURL . '.php';
+					$nav 			= 'standardNav';
+					$canEdit		= TRUE;
 			}
-		}
-	}
+		
+		} 	// End of normal page settings.
+	} 		// End of settings.
 
 	// Store whether 'edit' is set.
 	$editOn = (isset($_GET['edit']) && $canEdit && $loggedIn);

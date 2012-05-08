@@ -18,43 +18,44 @@
 	// echo a <li> for pages or an <h3> for titles.
 	foreach ($navArray as $la) {
 
-		// Set <li> class to 'current' if it is the current page.
-		$liClass = ($la[1] === $contentTitle) ?
-			' class="current"' :
-			'';
+		// Skip private entries unless logged in.
+		if ($la[0] === '0' || $loggedIn) {
 
-		$title = $la[1];
+			$title = $la[2];
 
-		if ($la[0] === '-')
-			$lineString = "\t<a href='?page=" . toUrl($title) . "'><li$liClass>$title</li></a>\n\n";
-		else if ($la[0] === '#')
-			$lineString = "\t<h3>$title</h3>\n\n";
-		else
-			$lineString = '';
+			// Set <li> class to 'current' if it is the current page.
+			$liClass = ($title === $contentTitle) ?
+				' class="current"' :
+				'';
+			
 
-		echo $lineString;
+			if ($la[1] === '-')
+				$lineString = "\t<a href='?page=" . toUrl($title) . "'><li$liClass>$title</li></a>\n\n";
+			else if ($la[1] === '#')
+				$lineString = "\t<h3>$title</h3>\n\n";
+			else
+				$lineString = '';
+
+			echo $lineString;
+	
+		}
 	}
-
-	// Check whether to show 'Login' or edit buttons.
-	$editText = "<p><a href='?page=$contentURL&amp;edit'>Edit page</a> | <a href='?page=Edit_Site'>Edit Site</a></p>";
-
-	$loginText = ($loggedIn) ?
-		"<p><a href='?page=$contentURL&amp;logout'>Logout</a></p>" :
-		"<p><a href='?page=Login'>Login</a></p>";
 
 ?>
 
 <div class=editButtons>
+<?php
 
-<?php 
+	if (!$loggedIn)
+		$editText = '<p><a href="?page=Login">Login</a></p>';
+	else if ($editOn)
+		$editText = '<p><a href="?page=' . $contentURL . '">Cancel Edit</a> | <a href="?page=Edit_Site">Edit Site</a></p>';
+	else
+		$editText = '<p><a href="?page=' . $contentURL . '&amp;edit">Edit Page</a> | <a href="?page=Edit_Site">Edit Site</a></p>';
 
-	if ($loggedIn)
-		echo $editText;
-
-	echo $loginText;
+	echo $editText;
 
 ?>
-
 </div>
 
 </ul>

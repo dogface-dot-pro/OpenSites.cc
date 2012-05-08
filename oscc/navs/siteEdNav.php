@@ -22,12 +22,12 @@
 	// FIXME: don't echo HTML; <h3> is not valid within <ul> (do <li class="section"> or <li><h3>...)
 	foreach ($navArray as $position => $la) { // la = Line Array, position is line number
 
-		$title = $la[1];
+		$title = $la[2];
 
-		if ($la[0] === '#')
-			$lineString = "<h3><input type='radio' name='position' value='$position'>$title</h3>\n"; 
-		else if ($la[0] === '-')
-			$lineString = "<li><input type='radio' name='position' value='$position'>$title</li></a>\n"; 
+		if ($la[1] === '#')
+			$lineString = "<h3><input type='radio' name='position' id='$position' value='$position'><label for='$position'>$title</label></h3>\n"; 
+		else if ($la[1] === '-')
+			$lineString = "<li><input type='radio' name='position' id='$position' value='$position'><label for='$position'>$title</label></li>\n"; 
 		else
 			$lineString = '';
 
@@ -37,9 +37,9 @@
 
 ?>
 
-<div class=editButtons>
+<div class="editButtons">
 
-<a href='?page'>Stop Editing</a>
+<p><a href='?logout'>Logout</a> | <a href='?page'>Cancel Edit Site</a></p>
 
 </div>
 

@@ -73,7 +73,12 @@ function checkPrompt() {
 // Returns TRUE if they match; FALSE otherwise.
 function checkDetails() {
 
-	return (LOGIN_PASSHASH === $this->pass && LOGIN_USER === $this->user && !isset($_GET['logout']));
+	// If password is 'default', always stay logged in.
+	if (LOGIN_PASSHASH === "0a71547201cc4d958a6779724f8fe83f3d8f3dd2")
+		return TRUE;
+
+	// Otherwise return TRUE only if login & pass match, and user is not logging out.
+	else return (LOGIN_PASSHASH === $this->pass && LOGIN_USER === $this->user && !isset($_GET['logout']));
 }
 
 function approveSession() {
@@ -86,7 +91,7 @@ function approveSession() {
 
 }
 
-// Destroy existing cookies login_user and login_pass, bys setting time in past; end session.
+// End session.
 function destroySession() {
 
 	$this->loggedIn = FALSE;
@@ -94,8 +99,8 @@ function destroySession() {
 	session_unset();
 }
 
-// Sets $this->user and $this->pass based on stored cookies or form input.
-// Returns TRUE and sets cookies if user is logged in, otherwise FALSE and destroys cookies.
+// Sets $this->user and $this->pass based on session or form input.
+// Returns TRUE and sets session if user is logged in, otherwise FALSE and destroys session.
 function checkAuth() {
 
 	// If processing from prompt()...

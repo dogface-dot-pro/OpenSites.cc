@@ -24,7 +24,7 @@ if ($newSiteName != null) {
 
 $position 		= intval(checkPost('position'));
 $action 		= checkPost('action');
-$newType 		= $navArray[$position][0];
+$newType 		= $navArray[$position][2];
 
 // Merge 'newpage' and 'newsection'
 if ($action === 'newpage' || $action === 'newsection') {
@@ -41,7 +41,7 @@ switch ($action) {
 	
 	case 'delete':
 
-		$delFile 	= 'oscc/content/' . $navArray[$position][2] . '.php';
+		$delFile 	= 'oscc/content/' . $navArray[$position][3] . '.php';
 		$before 	= array_slice($navArray, 0, $position);
 		$after 		= array_slice($navArray, $position + 1);
 		$tempArray 	= array_merge($before, $after);
@@ -56,31 +56,31 @@ switch ($action) {
 	case 'rename':
 
 		foreach($navArray as $line) {
-			if ($line[0] === $newType && $line[1] === $newTitle)
+			if ($line[1] === $newType && $line[2] === $newTitle)
 				break 2;
 		}
 
-		$oldTitle 					= $navArray[$position][2];
-		$tempArray[$position][1] 	= $newTitle;
-		$tempArray[$position][2] 	= toUrl($newTitle);
+		$oldUrl 					= $navArray[$position][3];
+		$tempArray[$position][2] 	= $newTitle;
+		$tempArray[$position][3] 	= toUrl($newTitle);
 
 		arr2csv('data/structureData', $tempArray);
 
-		if ($navArray[$position][0] === '-')
-			rename('oscc/content/' . $oldTitle . '.php', 'oscc/content/' . $newUrl . '.php');
+		if ($navArray[$position][1] === '-')
+			rename('oscc/content/' . $oldUrl . '.php', 'oscc/content/' . $newUrl . '.php');
 
 		break;
 
 	case 'new':
 
 		foreach($navArray as $line) {
-			if ($line[0] === $newType && $line[1] === $newTitle)
+			if ($line[1] === $newType && $line[2] === $newTitle)
 				break 2;
 		}
 
 		$before 	= array_slice($navArray, 0, $position + 1);
 		$after 		= array_slice($navArray, $position + 1);
-		$new 		= array(array($newType, $newTitle, $newUrl));
+		$new 		= array(array('0', $newType, $newTitle, $newUrl));
 		$tempArray 	= array_merge($before, $new, $after);
 
 		arr2csv('data/structureData', $tempArray);
