@@ -5,10 +5,12 @@ body {
   color: #444;
   background-color: #eee; 
   margin: 0;
-  padding: 0; }
+  padding: 0;
+  padding-bottom: 20px; }
 p {
   text-indent: 1em; }
 a {
+  text-decoration:none;
   color: black; }
 textarea {
   width: 100%;
@@ -19,20 +21,19 @@ input {
 
 /* TITLE BAR */
 
-div.titleBar {
+.titleBar {
   background: black;
   color: white;
-  position: absolute;
+  position: relative;
   margin: 0;
   padding: 0;
-  top: 0;
   width: 100%;
   height: 50px;
   text-align: center;
   -webkit-box-shadow: 0 0 8px #AAA;
 }
 
-div.titleBar h1 {
+.titleBar h1 {
   position: relative;
   top: -5px;
   padding: 0;
@@ -45,103 +46,113 @@ div.titleBar h1 {
 
 /* CONTENT */
 
-div.content {
+.content {
   position: relative;
   width: 600px;
   left: 300px;
-  top: 70px;
   padding: 40px;
   padding-top: 10px;
-  margin-bottom: 70px;
+  margin-bottom: 20px;
+  margin-top: 20px;
   text-align: justify;
   background: white;
-  -webkit-box-shadow: 0 0 8px #D0D0D0;
-  -moz-box-shadow: 0 0 8px #D0D0D0;
   box-shadow: 0 0 8px #D0D0D0;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
   border-radius: 5px;
 }
 
-div.content h2 {
+.content h2 {
   padding: 10px;
   background: #DDD;
 }
 
-div.content a {
+.content a {
   font-weight: bold;
 }
 
 
 /* NAV */
 
-div.nav {
+.nav {
   position: absolute;
-  top: 75px;
-  margin: 0;
+  margin: 20px;
   padding: 0;
-  left: 20px;
   width: 200px;
-  -webkit-box-shadow: 0 0 8px #D0D0D0;
+  background: #ccc;
+  box-shadow: 0 0 8px #D0D0D0;
 }
-div.nav ul {
+.nav ul {
   padding: 0;
   padding-top: 5px;
   padding-bottom: 5px;
   margin: 0;
   list-style-type: none;
-  background: #ccc;
 }
-div.nav li {
-  background: white;
+.navPage, .navSection {
+  position:relative;
   margin: 5px;
   padding: 3px;
-  border-right: 15px solid #444;
-  -webkit-box-shadow: 0 0 8px #AAA;
-}
-div.nav li.current {
-  border-right: 15px solid orange;
-}
-div.nav h2 {
-  background-color: #eee;
-  font-size: small;
-  color: #999;
-  padding-left: 5px;
-}
-div.nav h3 {
-  margin: 0;
-  padding-left: 5px;
-}
-div.nav a {
-  text-decoration: none;
-  color: #444; 
 }
 
-div.editButtons {
+.navPage {
+  background: white;
+  border-right: 20px solid #444;
+  box-shadow: 0 0 8px #AAA;
+}
+
+.navSection {
+  font-size: large;
+  font-weight: bold;
+  border-right: 20px solid #CCC;
+}
+
+.navPage li, .navSection li {
+  position:relative;
+  display:inline;
+}
+
+#navCurrent {
+  border-right: 20px solid orange;
+}
+
+.navPrivate {
+  position:absolute;
+  right:-22px;
+  display:inline;
+  width:20px;
+  height: 20px;
+  z-index: 10;
+}
+
+.private img {
+  display:inline;
+}
+
+.editButtons p, .editButtons a {
+  color: #444;
+  text-indent: none;
   font-size: small;
   margin: 0;
-  padding: 3px;
+  padding: 0;
 }
 
 /* EDIT */
 
-div.edit {
+.edit {
   position: relative;
   width: 640px;
   left: 300px;
+  top: 8px;
   padding: 10px;
-  margin-top: 60px;
-  margin-bottom: -50px;
   text-align: justify;
   background: #eee;
 }
 
-div.edit h2 {
+.edit h2 {
   margin: 0;
   margin-bottom: 10px;
 }
 
-div.alert {
+.alert {
   position: relative;
   width: 100%;
   margin: 0;
@@ -155,37 +166,37 @@ div.alert {
 
 /* EDIT SITE */
 
-div.siteEdActions {
+.siteEdActions {
   position: relative;
   width: 400px;
   -webkit-box-shadow: 0 0 8px #DDD;
 }
 
-div.siteEdActions ul {
+.siteEdActions ul {
   list-style-type: none;
   background: #ccc;
   padding: 5px;
 }
 
-div.siteEdActions li {
+.siteEdActions li {
   background: white;
   margin: 5px;
   padding: 3px;
   border-left: 15px solid #444;
 }
 
-div.siteEdActions h3 {
+.siteEdActions h3 {
   margin: 0;
   padding-left: 5px;
 }
 
-span.arrow {
+.arrow {
   font-size: xx-large;
   font-weight: bold;
   font-family: monospace;
 }
 
-div.stopEdit {
+.stopEdit {
   text-decoration: none;
   background: white;
   width: 200px;
@@ -195,24 +206,24 @@ div.stopEdit {
   border-left: 15px solid #444;
 }
 
-span.stopEdit {
+.stopEdit {
   margin-left: 5px;
 }
 
-div.sitesettings {
+.sitesettings {
   text-indent: 0;
   background: #ccc;
   padding: 5px;
   width: 400px;
 }
 
-div.sitesettings ul {
+.sitesettings ul {
   list-style-type: none;
   margin: 3px;
   padding: 0px;
 }
 
-div.sitesettings li {
+.sitesettings li {
   background: white;
   margin: 5px;
   padding: 3px;
@@ -220,7 +231,7 @@ div.sitesettings li {
   -webkit-box-shadow: 0 0 8px #AAA;
 }
 
-div.newtitlesnote {
+.newtitlesnote {
   text-indent: 2em;
   font-size: small;
   color: #777;
