@@ -37,30 +37,36 @@
 		$nav 			= 'siteEdNav';
 		$canEdit		= FALSE;
 
-	// Ditto for Login page.
-	} else if ($check === 'Login') {
-		$contentURL		= 'Login';
-		$contentTitle	= 'Log-in';
-		$contentPath	= 'oscc/Login.php';
-		$nav 			= 'standardNav';
-		$canEdit		= FALSE;
-	
+		
 	// Or get settings for a normal page.
-	} else {
+	} else if ($check != 'Login') {
+
+		$foundPage = FALSE;
 
 		foreach($navArray as $position => $lineArray) {
-			// Set settings from line in structureData, if it matches $check 
+			// Set settings from line in structureData, if it matches $check and privacy passes.
 			// (or if it is first page in list, in case an invalid page was entered).
-			if ($lineArray[1] === '-' && ($lineArray[3] === $check || $position === 0)) {
+			if ($lineArray[1] === '-' && ($lineArray[0] === '0' || $loggedIn) && ($lineArray[3] === $check || $position === 0)) {
 					$contentURL 	= $lineArray[3];
 					$contentTitle	= $lineArray[2];
 					$contentPath	= 'oscc/content/' . $contentURL . '.php';
 					$nav 			= 'standardNav';
 					$canEdit		= TRUE;
+					$foundPage		= TRUE;
 			}
 		
 		} 	// End of normal page settings.
-	} 		// End of settings.
+
+	// If no non-private page was found or user requested login, show login page.
+	} if ($check === 'Login' || $foundPage === FALSE) {
+		
+		$contentURL		= 'Login';
+		$contentTitle	= 'Log-in';
+		$contentPath	= 'oscc/Login.php';
+		$nav 			= 'standardNav';
+		$canEdit		= FALSE;
+		
+	} // End of settings.
 
 	// Store whether 'edit' is set.
 	$editOn = (isset($_GET['edit']) && $canEdit && $loggedIn);

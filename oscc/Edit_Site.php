@@ -15,7 +15,7 @@
 		<li><input type="radio" name="action" id="delete" value="delete">			<label for="delete">Delete</label></li>
 		<li><input type="radio" name="action" id="rename" value="rename">			<label for="rename">Rename</label></li>
 		New Title:<input type="text" name="newtitle"></input></br>
-		Private?: <input type="checkbox" name="private"></input></br>
+		Private?: <input type="checkbox" name="private" value="private"></input></br>
 		<hr>
 		<h3>Site Settings</h3>
 		<li>Change Site Name: <input type="text" name="newSiteName" value="<?php echo $config['siteName'] ?>"></input></li><br>

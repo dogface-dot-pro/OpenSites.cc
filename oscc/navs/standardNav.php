@@ -16,23 +16,28 @@
 
 	// For each line in $navArray (NB, each line is an array),
 	// echo a <li> for pages or an <h3> for titles.
-	foreach ($navArray as $la) {
+	foreach ($navArray as $lineArray) {
 
 		// Skip private entries unless logged in.
-		if ($la[0] === '0' || $loggedIn) {
+		if ($lineArray[0] === '0' || $loggedIn) {
 
-			$title = $la[2];
+			$title = $lineArray[2];
 
 			// Set <li> class to 'current' if it is the current page.
-			$liClass = ($title === $contentTitle) ?
-				' class="current"' :
+			$currentId = ($title === $contentTitle) ?
+				' id="navCurrent"' :
 				'';
+
+			$privDiv = ($lineArray[0] === '1') ?
+				'<div class="navPrivate"><img src="oscc/pub/img/lock-by-glyphish.png"></div>' :
+				'';
+
 			
 
-			if ($la[1] === '-')
-				$lineString = "\t<a href='?page=" . toUrl($title) . "'><li$liClass>$title</li></a>\n\n";
-			else if ($la[1] === '#')
-				$lineString = "\t<h3>$title</h3>\n\n";
+			if ($lineArray[1] === '-')
+				$lineString = "\t<a href='?page=" . toUrl($title) . "'><div class='navPage $divClass'$currentId><li>$title</li>$privDiv</div></a>\n\n";
+			else if ($lineArray[1] === '#')
+				$lineString = "\t<div class='navSection'><li>$title</li>$privDiv</div>\n\n";
 			else
 				$lineString = '';
 
@@ -49,7 +54,7 @@
 	if (!$loggedIn)
 		$editText = '<p><a href="?page=Login">Login</a></p>';
 	else if ($editOn)
-		$editText = '<p><a href="?page=' . $contentURL . '">Cancel Edit</a> | <a href="?page=Edit_Site">Edit Site</a></p>';
+		$editText = '<p><a href="?page=' . $contentURL . '">Stop Editing</a> | <a href="?page=Edit_Site">Edit Site</a></p>';
 	else
 		$editText = '<p><a href="?page=' . $contentURL . '&amp;edit">Edit Page</a> | <a href="?page=Edit_Site">Edit Site</a></p>';
 

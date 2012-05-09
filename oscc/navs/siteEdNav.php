@@ -10,9 +10,9 @@
 	Starts a form that finishes in the content. 
 -->
 
-<form action="?page=Edit_Site&amp;update" method="post">
-
 <div class="nav">
+
+<form action="?page=Edit_Site&amp;update" method="post">
 
 <ul>
 
@@ -20,14 +20,18 @@
 
 	// Same as normal nav menu but with radio buttons.
 	// FIXME: don't echo HTML; <h3> is not valid within <ul> (do <li class="section"> or <li><h3>...)
-	foreach ($navArray as $position => $la) { // la = Line Array, position is line number
+	foreach ($navArray as $position => $lineArray) { // la = Line Array, position is line number
 
-		$title = $la[2];
+		$title = $lineArray[2];
 
-		if ($la[1] === '#')
-			$lineString = "<h3><input type='radio' name='position' id='$position' value='$position'><label for='$position'>$title</label></h3>\n"; 
-		else if ($la[1] === '-')
-			$lineString = "<li><input type='radio' name='position' id='$position' value='$position'><label for='$position'>$title</label></li>\n"; 
+		$privDiv = ($lineArray[0] === '1') ?
+				'<div class="navPrivate"><img src="oscc/pub/img/lock-by-glyphish.png"></div>' :
+				'';
+
+		if ($lineArray[1] === '#')
+			$lineString = "<div class='navSection'><li><input type='radio' name='position' id='$position' value='$position'><label for='$position'>$title</label></li>$privDiv</div>\n"; 
+		else if ($lineArray[1] === '-')
+			$lineString = "<div class='navPage'><li><input type='radio' name='position' id='$position' value='$position'><label for='$position'>$title</label></li>$privDiv</div>\n"; 
 		else
 			$lineString = '';
 
@@ -39,7 +43,7 @@
 
 <div class="editButtons">
 
-<p><a href='?logout'>Logout</a> | <a href='?page'>Cancel Edit Site</a></p>
+<p><a href='?logout'>Logout</a> | <a href='?page'>Stop Editing Site</a></p>
 
 </div>
 

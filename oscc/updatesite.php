@@ -24,7 +24,11 @@ if ($newSiteName != null) {
 
 $position 		= intval(checkPost('position'));
 $action 		= checkPost('action');
-$newType 		= $navArray[$position][2];
+$newType 		= $navArray[$position][1];
+$newTitle 		= checkPost('newtitle');
+$newUrl			= toUrl($newTitle);
+$newFile 		= 'oscc/content/' . $newUrl . '.php';
+$tempArray		= $navArray;
 
 // Merge 'newpage' and 'newsection'
 if ($action === 'newpage' || $action === 'newsection') {
@@ -32,10 +36,11 @@ if ($action === 'newpage' || $action === 'newsection') {
 	$action = 'new';
 }
 
-$newTitle 		= checkPost('newtitle');
-$newUrl			= toUrl($newTitle);
-$newFile 		= 'oscc/content/' . $newUrl . '.php';
-$tempArray		= $navArray;
+// Set privacy
+if (checkPost('private') === 'private')
+	$newPrivacy = '1';
+else
+	$newPrivacy = '0';
 
 switch ($action) {
 	
@@ -80,7 +85,7 @@ switch ($action) {
 
 		$before 	= array_slice($navArray, 0, $position + 1);
 		$after 		= array_slice($navArray, $position + 1);
-		$new 		= array(array('0', $newType, $newTitle, $newUrl));
+		$new 		= array(array($newPrivacy, $newType, $newTitle, $newUrl));
 		$tempArray 	= array_merge($before, $new, $after);
 
 		arr2csv('data/structureData', $tempArray);
@@ -116,6 +121,14 @@ switch ($action) {
 		$tempLine 					= $navArray[$position];
 		$tempArray[$position] 		= $navArray[$position + 1];
 		$tempArray[$position + 1]	= $tempLine;
+
+		arr2csv('data/structureData', $tempArray);
+
+		break;
+
+	case 'setprivacy':
+
+		$tempArray[$position][0] 	= $newPrivacy;
 
 		arr2csv('data/structureData', $tempArray);
 
