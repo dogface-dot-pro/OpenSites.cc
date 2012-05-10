@@ -13,10 +13,6 @@ define('LOGIN_PASSHASH', $config['passwordHash']);
 //		otherwise returns FALSE and destroys session.
 class Login {
 
-
-	// Days "remember me" cookies will remain
-	var $cookie_duration = 21;
-
 	// temporary values for comparing login are auto set here. do not set your own $user or $pass here
 	var $user = "";
 	var $pass = "";

@@ -8,11 +8,6 @@
 
 // Set page-specific variables. ##
 
-	// Get 'page' variable from URL, filter it, store it as $check.
-	$check = isset($_GET['page']) ?
- 		toUrl(filter_input(INPUT_GET, 'page')) :
- 		null;
-
 	// Start session, load login.class, instantiate a Login object,
  	// use it to set $loggedIn to TRUE or FALSE.
 	session_start();
@@ -26,6 +21,11 @@
 	// Make a 2-D array of the site's structure/nav data,
 	// only showing private pages if $loggedIn is TRUE.
 	$navArray = csv2arr('/data/structureData');
+
+	// Get 'page' variable from URL, filter it, store it as $check.
+	$check = isset($_GET['page']) ?
+ 		toUrl(filter_input(INPUT_GET, 'page')) :
+ 		null;
 
 	// Settings to load if on the site edit page
 	// (since these aren't stored in structureData).
